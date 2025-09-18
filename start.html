@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Start</title>
+  <link rel="preload" href="assets/css/loading.css" as="style">
+  <link rel="preload" href="assets/js/loading.js" as="script">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/start.css">
+</head>
+<body>
+  <main class="center">
+    <h1>Portfolio de Keyu</h1>
+    <button class="btn" id="go">START HACKING</button>
+    <p class="small">Ce site est réaliser à l'aide d'une inteligence artificielle</p>
+  </main>
+  <script>
+    document.getElementById('go').addEventListener('click', ()=>{
+      // 可带上你想传递的查询参数，比如预设语言等
+      location.href = 'sites/loading.html?next=home.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+:root {
+  --bg:#0b0f14; /*黑色*/
+  --fg:#cf0000; /*红色*/
+  --accent:#00d9ff; /*青色*/
+  --muted:#6082a3; /*灰色*/
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body {
+  background: linear-gradient(to bottom,
+              #2d0d0d 0%,
+              #180000 50%,
+              #0a0000 100%);
+  color: var(--fg);
+}
+.center {
+  min-height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:24px; padding:24px;
+}
+.btn {
+  appearance:none; border:1px solid var(--accent); background:transparent; color:var(--accent);
+  padding:12px 24px; border-radius:999px; cursor:pointer; letter-spacing:.5px;
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+  box-shadow:0 0 0 0 rgba(0,217,255,0.4), inset 0 0 12px rgba(0,217,255,0.12);
+}
+.btn:hover { transform:translateY(-1px); box-shadow:0 0 24px 2px rgba(0,217,255,0.25), inset 0 0 16px rgba(0,217,255,0.18); }
+.small { color:var(--muted); font-size:14px }
+a{color:var(--accent); text-decoration:none}

@@ -1,0 +1,12 @@
+assets/
+  css/
+    base.css
+    start.css
+    loading.css
+    home.css
+  js/
+    loading.js
+sites/
+  loading.html
+  home.html
+start.html
