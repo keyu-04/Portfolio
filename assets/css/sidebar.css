@@ -23,10 +23,19 @@
 .nav{ outline: none !important; }
 
 /* ============ 导航项：基础状态更“沉”，hover 稍抬起 ============ */
-.nav{ position: relative; list-style: none; margin: 0; padding: 8px 0; }
+.nav{
+  position:relative; 
+  padding:8px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  gap: 12px;
+}
 .nav-item{
   position: relative;
-  margin: 6px 8px;
+  margin: 0;
   padding: 14px 16px 14px 18px;
   border-radius: 14px;
   color: var(--fg);                     /* 仍使用你的前景色 */
@@ -53,25 +62,30 @@
 /* ============ 选中高亮（重做 slider：内发光卡槽） ============ */
 .slider{
   position: absolute;
+  top: 0;
   left: 0;
-  width: 100%;
-  height: 46px;                         /* 会被 JS 动态覆盖 */
+  width: 0;
+  height: 0;
   border-radius: 14px;
   pointer-events: none;
-  /* 不再只是一条红框：改为“内发光槽 + 微弱外晕” */
   background:
     linear-gradient(180deg,
       color-mix(in oklab, var(--ui-red) 22%, transparent) 0%,
       transparent 100%);
-  /* 组合阴影：内侧红光、外侧轻微晕染、极轻描边 */
   box-shadow:
     inset 0 0 0 2px color-mix(in oklab, var(--ui-red) 55%, transparent),
     inset 0 0 22px color-mix(in oklab, var(--ui-red) 45%, transparent),
     0 8px 18px rgba(0,0,0,0.28),
     0 0 18px color-mix(in oklab, var(--ui-red) 28%, transparent);
-  transform: translateY(0);
-  transition: transform .22s cubic-bezier(.2,.8,.2,1), height .22s;
+  transform: translate3d(0,0,0);
+  transition: transform .22s cubic-bezier(.2,.8,.2,1), width .22s, height .22s;
 }
+
+/* 默认不显示光标，选中后才出现 */
+.slider { opacity: 0; }
+.slider.is-on { opacity: 1; }
+
+
 
 /* 被选中项本身稍微提亮边线，避免只有“槽”在发光 */
 .nav-item.is-active{
@@ -136,15 +150,4 @@
   align-self: start;
 }
 
-/* 让 slider 和条目左右对齐（如果你给 .nav 加了水平内边距） */
-.nav{
-  display: flex;
-  flex-direction: column;
-  padding: 8px;   /* 左右都有 8px 内边距 */
-  gap: 12px;
-}
-.slider{
-  left: 8px;
-  right: 8px;     /* 与 .nav 的左右 padding 对齐 */
-}
 
