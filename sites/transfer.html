@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Sidebar UI</title>
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/sidebar.css" />
+</head>
+<body>
+  <!-- 固定背景：仍由你的 base.css 控制 -->
+  <div class="bg-fixed"></div>
+
+  <div class="app">
+    <!-- 侧边导航：滑动高亮 -->
+    <nav class="sidebar" aria-label="Sections">
+      <ul class="nav" role="listbox" tabindex="0">
+        <div class="slider" aria-hidden="true"></div>
+
+        <li class="nav-item is-active" data-fragment="/fragments/design.html" role="option" aria-selected="true">
+          <span>Design</span>
+        </li>
+        <li class="nav-item" data-fragment="/fragments/programme.html" role="option">
+          <span>Programme</span>
+        </li>
+        <li class="nav-item" data-fragment="/fragments/art.html" role="option">
+          <span>Art</span>
+        </li>
+        <li class="nav-item" data-fragment="/fragments/histoire.html" role="option">
+          <span>Histoire</span>
+        </li>
+      </ul>
+      <a class="btn" href="home.html">Back</a>
+    </nav>
+
+    <!-- 右侧内容区（只这个区域会更新） -->
+    <main id="content" class="content" tabindex="-1" aria-live="polite">
+      <h1>Bienvenue</h1>
+      <p>Sélectionnez une section à gauche.</p>
+    </main>
+  </div>
+
+  <script src="../assets/js/app.js" defer></script>
+</body>
+</html>
+

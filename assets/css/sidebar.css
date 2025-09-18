@@ -1,0 +1,150 @@
+/* ============ 变量（沿用你 base.css 的配色） ============ */
+:root{
+  /* 红色主高亮（你当前 --fg 是红色）与青色辅助（--accent） */
+  --ui-red:    var(--fg);
+  --ui-cyan:   var(--accent);
+  --ui-pane:   rgba(0,0,0,0.35);   /* 面板透明度 */
+  --ui-border: rgba(255,255,255,0.07);
+}
+
+/* ============ 容器与布局微调（保持你原布局不变） ============ */
+.sidebar{
+  background: var(--ui-pane);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--ui-border);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+
+
+/* 取消旧的虚线 outline（如果 base.css 里有） */
+.nav{ outline: none !important; }
+
+/* ============ 导航项：基础状态更“沉”，hover 稍抬起 ============ */
+.nav{ position: relative; list-style: none; margin: 0; padding: 8px 0; }
+.nav-item{
+  position: relative;
+  margin: 6px 8px;
+  padding: 14px 16px 14px 18px;
+  border-radius: 14px;
+  color: var(--fg);                     /* 仍使用你的前景色 */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.10));
+  border: 1px solid color-mix(in oklab, var(--fg) 18%, transparent);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .2s, background .2s;
+}
+.nav-item:hover{
+  transform: translateX(4px);
+  border-color: color-mix(in oklab, var(--fg) 35%, transparent);
+  box-shadow: 0 0 14px color-mix(in oklab, var(--fg) 24%, transparent);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.12));
+}
+
+/* 键盘聚焦到某一项时的可见性（不再用整块的青色虚线框） */
+.nav-item:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--ui-cyan) 45%, transparent),
+    0 0 18px color-mix(in oklab, var(--ui-cyan) 30%, transparent);
+  border-color: color-mix(in oklab, var(--ui-cyan) 40%, var(--fg) 10%);
+}
+
+/* ============ 选中高亮（重做 slider：内发光卡槽） ============ */
+.slider{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 46px;                         /* 会被 JS 动态覆盖 */
+  border-radius: 14px;
+  pointer-events: none;
+  /* 不再只是一条红框：改为“内发光槽 + 微弱外晕” */
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklab, var(--ui-red) 22%, transparent) 0%,
+      transparent 100%);
+  /* 组合阴影：内侧红光、外侧轻微晕染、极轻描边 */
+  box-shadow:
+    inset 0 0 0 2px color-mix(in oklab, var(--ui-red) 55%, transparent),
+    inset 0 0 22px color-mix(in oklab, var(--ui-red) 45%, transparent),
+    0 8px 18px rgba(0,0,0,0.28),
+    0 0 18px color-mix(in oklab, var(--ui-red) 28%, transparent);
+  transform: translateY(0);
+  transition: transform .22s cubic-bezier(.2,.8,.2,1), height .22s;
+}
+
+/* 被选中项本身稍微提亮边线，避免只有“槽”在发光 */
+.nav-item.is-active{
+  border-color: color-mix(in oklab, var(--ui-red) 55%, transparent);
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.10));
+}
+
+/* ============ 内容区轻微提亮（与导航分层） ============ */
+.content{
+  background: rgba(0,0,0,0.35);
+  border: 1px solid var(--ui-border);
+  border-radius: 18px;
+  padding: 24px;
+  min-height: 70vh;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+.content.fade-in{ animation: fade .28s ease }
+@keyframes fade{ from{opacity:.45; transform: translateY(6px)} to{opacity:1; transform:none} }
+
+/* ============ “Back” 按钮（更克制的青色） ============ */
+.btn-back{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in oklab, var(--ui-cyan) 70%, transparent);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.15));
+  color: var(--fg);
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s;
+}
+.btn-back:hover{
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--ui-cyan) 85%, transparent);
+  box-shadow:
+    0 0 14px color-mix(in oklab, var(--ui-cyan) 30%, transparent),
+    0 6px 14px rgba(0,0,0,0.25);
+}
+.btn-back:active{ transform: translateY(0) scale(.98); }
+.btn-back:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--ui-cyan) 45%, transparent),
+    0 0 22px color-mix(in oklab, var(--ui-cyan) 28%, transparent);
+}
+
+
+/* 恢复双栏布局：左侧 260px 侧边栏 + 右侧自适应内容 */
+.app{
+  display: grid;
+  grid-template-columns: 260px 1fr;  /* ← 关键：两列 */
+  gap: 24px;
+  min-height: 100dvh;
+  padding: 24px;
+}
+
+/* 让侧边栏在滚动时固定在视口内的上缘，回到“贴左竖排”的感觉 */
+.sidebar{
+  position: sticky;
+  top: 24px;
+  align-self: start;
+}
+
+/* 让 slider 和条目左右对齐（如果你给 .nav 加了水平内边距） */
+.nav{
+  display: flex;
+  flex-direction: column;
+  padding: 8px;   /* 左右都有 8px 内边距 */
+  gap: 12px;
+}
+.slider{
+  left: 8px;
+  right: 8px;     /* 与 .nav 的左右 padding 对齐 */
+}
+
