@@ -1,4 +1,4 @@
-// ===== 基础获取 =====
+// 基础获取
 const nav = document.querySelector('.nav');
 const slider = document.querySelector('.slider');
 const content = document.getElementById('content');
@@ -96,7 +96,7 @@ if (!nav || !slider || !content || items.length === 0) {
     loadFragment(fragment, { push });
   }
 
-  // ===== 事件绑定 =====
+  // 事件绑定
   nav.addEventListener('click', (ev) => {
     const target = ev.target.closest('.nav-item');
     if (!target || !nav.contains(target)) return;

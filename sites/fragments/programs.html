@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Cyber Showcase</title>
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/programs.css" />
+</head>
+
+<div class="prog-container">
+  <header class="prog-header">
+    <h1>Programs</h1>
+    <p class="small">左侧放代码，右侧放运行演示。下面提供模板，你只需替换代码与演示资源。</p>
+    <div class="accent-line"></div>
+  </header>
+
+  <section class="prog-card" id="game-1">
+    <header class="prog-card-header">
+      <h2>示例：小游戏 1</h2>
+      <p class="small">在右侧放置演示，左侧粘贴代码（支持多文件，按需复制结构）。</p>
+    </header>
+
+    <div class="prog-grid">
+      <div class="prog-code" data-filename="main.py">
+        <div class="code-toolbar">
+          <span class="filename">main.py</span>
+          <span class="flex-spacer"></span>
+          <button class="btn btn-toggle" type="button">折叠</button>
+          <button class="btn btn-copy" type="button">复制</button>
+        </div>
+        <div class="code-scroll">
+          <pre class="code-block" aria-label="main.py"><code># 在这里粘贴 main.py 代码
+# 例如：游戏主循环、事件处理、渲染逻辑等
+
+# 提示：如需展示多文件，可复制整个 .prog-code 区块
+# 修改上方文件名，并粘贴对应代码
+</code></pre>
+        </div>
+      </div>
+
+      <div class="prog-demo" data-demo-src="">
+        <div class="demo-placeholder">
+          在这里放置演示：视频/GIF/iframe/canvas
+        </div>
+        <p class="small demo-note">可替换为 <code>&lt;video&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;iframe&gt;</code> 或 WebGL/canvas。设置 <code>data-demo-src</code> 也可一键插入 iframe。</p>
+        <div class="demo-actions">
+          <button class="btn demo-run" type="button">播放演示</button>
+          <a class="btn demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="prog-card" id="game-2">
+    <header class="prog-card-header">
+      <h2>示例：小游戏 2</h2>
+      <p class="small">可以继续添加更多卡片，每个卡片独立展示一个项目。</p>
+    </header>
+
+    <div class="prog-grid">
+      <div class="prog-code" data-filename="game.py">
+        <div class="code-toolbar">
+          <span class="filename">game.py</span>
+          <span class="flex-spacer"></span>
+          <button class="btn btn-toggle" type="button">折叠</button>
+          <button class="btn btn-copy" type="button">复制</button>
+        </div>
+        <div class="code-scroll">
+          <pre class="code-block" aria-label="game.py"><code># 在这里粘贴另一个文件的代码
+# 可用于演示更复杂的项目结构
+</code></pre>
+        </div>
+      </div>
+
+      <div class="prog-demo" data-demo-src="">
+        <div class="demo-placeholder">
+          演示占位（替换为你的视频/GIF/网页）
+        </div>
+        <p class="small demo-note">如果是本地 HTML 演示页面，可将路径填入 <code>data-demo-src</code> 或“新窗口打开”链接。</p>
+        <div class="demo-actions">
+          <button class="btn demo-run" type="button">播放演示</button>
+          <a class="btn demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    const root = document.currentScript?.parentElement || document;
+
+    // 复制代码
+    root.querySelectorAll('.btn-copy').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const card = btn.closest('.prog-card');
+        const code = card?.querySelector('.code-block')?.innerText || '';
+        try {
+          await navigator.clipboard.writeText(code);
+          const old = btn.textContent;
+          btn.textContent = '已复制';
+          setTimeout(() => (btn.textContent = old), 1200);
+        } catch (e) {
+          alert('复制失败，请手动选择复制');
+        }
+      });
+    });
+
+    // 折叠/展开代码
+    root.querySelectorAll('.btn-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const box = btn.closest('.prog-code');
+        box?.classList.toggle('is-collapsed');
+        btn.textContent = box?.classList.contains('is-collapsed') ? '展开' : '折叠';
+      });
+    });
+
+    // 播放演示（如果设置了 data-demo-src，则插入 iframe）
+    root.querySelectorAll('.prog-demo').forEach(section => {
+      const runBtn = section.querySelector('.demo-run');
+      const openBtn = section.querySelector('.demo-open');
+      const src = (section.getAttribute('data-demo-src') || '').trim();
+      if (src) openBtn?.setAttribute('href', src);
+
+      runBtn?.addEventListener('click', () => {
+        const hasEmbed = section.querySelector('iframe, video, img, canvas');
+        const srcNow = (section.getAttribute('data-demo-src') || '').trim();
+        if (!hasEmbed && srcNow) {
+          const iframe = document.createElement('iframe');
+          iframe.src = srcNow;
+          iframe.className = 'demo-frame';
+          iframe.loading = 'lazy';
+          iframe.setAttribute('title', '演示');
+          iframe.setAttribute('referrerpolicy', 'no-referrer');
+          const placeholder = section.querySelector('.demo-placeholder');
+          placeholder?.replaceWith(iframe);
+        } else if (!hasEmbed) {
+          runBtn.textContent = '请放入视频/图片/页面';
+          setTimeout(() => (runBtn.textContent = '播放演示'), 1500);
+        }
+      });
+    });
+  })();
+</script>

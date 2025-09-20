@@ -1,0 +1,150 @@
+/* Visuals page styles */
+
+.vis-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: var(--fg);
+}
+
+.vis-header h1 {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 .5rem 0;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+.accent-line {
+  height: 2px;
+  background: linear-gradient(90deg,
+    var(--accent) 0%,
+    rgba(0, 217, 255, 0.5) 50%,
+    transparent 100%);
+  width: 100%;
+  margin: 1rem 0 0;
+}
+
+/* Card */
+.vis-card {
+  background: rgba(11, 15, 20, 0.8);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.vis-card:hover { box-shadow: 0 0 30px rgba(0, 217, 255, 0.2); }
+
+.vis-card-header h2 {
+  color: var(--fg2);
+  font-size: 1.6rem;
+  margin: 0 0 .5rem 0;
+  letter-spacing: 1px;
+}
+
+/* Layout */
+.vis-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr; /* gallery | side */
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+/* Gallery as a vertical list of items */
+.vis-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* One row: image left, note right */
+.art-item {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) 1fr;
+  gap: .9rem;
+  align-items: stretch;
+}
+
+.art {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(0, 217, 255, .35);
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, .25);
+  display: block;
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(0, 217, 255, .1);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.art:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0, 217, 255, .18); border-color: var(--accent); }
+
+/* Per-art note */
+.art-note {
+  border: 1px solid rgba(0, 217, 255, 0.35);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: .75rem .9rem;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+.art-note h4 { margin: 0; font-size: 1.05rem; color: var(--accent); letter-spacing: .4px; }
+.art-note p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+/* Placeholder styling for dev */
+.art-ph {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-style: italic; letter-spacing: .5px;
+  background: rgba(207, 0, 0, 0.08);
+  border: 1px dashed var(--fg);
+}
+
+/* Sidebar */
+.vis-side {
+  border: 1px solid rgba(0, 217, 255, 0.35);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 1rem 1.25rem;
+}
+
+.vis-side h3 { color: var(--accent); margin: 0 0 .5rem 0; letter-spacing: .5px; }
+.vis-desc { color: var(--muted); line-height: 1.6; margin: 0 0 .75rem 0; }
+
+.vis-meta { list-style: none; margin: 0 0 1rem 0; padding: 0; }
+.vis-meta li { display: flex; gap: .5rem; margin: .35rem 0; color: var(--muted); }
+.vis-meta li span { min-width: 64px; color: var(--fg); font-weight: 600; letter-spacing: .25px; }
+.vis-meta li em { font-style: normal; color: var(--muted); }
+
+.vis-actions { display: flex; gap: .5rem; }
+
+/* Button variant for downloads */
+.btn.btn-download {
+  border-color: var(--fg2);
+  color: var(--fg2);
+  box-shadow: 0 0 0 0 rgba(207, 159, 0, 0.35), inset 0 0 12px rgba(207, 159, 0, 0.12);
+}
+.btn.btn-download:hover {
+  box-shadow: 0 0 24px 2px rgba(207, 159, 0, 0.25), inset 0 0 16px rgba(207, 159, 0, 0.18);
+}
+
+/* Footer note */
+.vis-footer { margin: 1rem 0 0 0; color: var(--muted); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .vis-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .vis-container { padding: 1rem; }
+  .vis-header h1 { font-size: 1.8rem; }
+  .vis-card { padding: 1rem; }
+  .art-item { grid-template-columns: 1fr; }
+}
