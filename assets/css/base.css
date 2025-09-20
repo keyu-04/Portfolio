@@ -1,8 +1,9 @@
 :root {
-  --bg:#0b0f14; /*黑色*/
-  --fg:#cf0000; /*红色*/
-  --accent:#00d9ff; /*青色*/
-  --muted:#6082a3; /*灰色*/
+  --bg:#0b0f14; 
+  --fg:#cf0000; 
+  --fg2:#cf9f00; 
+  --accent:#00d9ff;
+  --muted:#6082a3;
 }
 
 *{box-sizing:border-box}
@@ -13,6 +14,10 @@ body {
               #180000 50%,
               #0a0000 100%);
   color: var(--fg);
+
+  background-repeat: no-repeat;   
+  background-size: 100% 100%;     
+  background-attachment: fixed;   
 }
 .center {
   min-height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:24px; padding:24px;

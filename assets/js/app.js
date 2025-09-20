@@ -149,6 +149,19 @@ if (!nav || !slider || !content || items.length === 0) {
   window.addEventListener('resize', () => requestAnimationFrame(repositionActive));
   nav.addEventListener('scroll', () => requestAnimationFrame(repositionActive));
 
+  items.forEach(item => {
+    item.addEventListener('pointerleave', () => {
+      if (!item.classList.contains('is-active')) return;
+      requestAnimationFrame(repositionActive);
+    });
+  });
+
+  nav.addEventListener('transitionend', (ev) => {
+    const item = ev.target.closest('.nav-item');
+    if (!item || !item.classList.contains('is-active')) return;
+    requestAnimationFrame(repositionActive);
+  });
+
   // ===== 初始化：不默认选中；只有带 hash 才直接选中 =====
   items.forEach(i => i.setAttribute('aria-selected', 'false'));  // 全部未选
 
@@ -158,3 +171,4 @@ if (!nav || !slider || !content || items.length === 0) {
     if (target) setActive(target, { push: false });
   }
 }
+

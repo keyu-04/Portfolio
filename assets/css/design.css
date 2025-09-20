@@ -1,0 +1,137 @@
+.gdd-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: var(--fg);
+}
+
+.gdd-header {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.gdd-header h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+.accent-line {
+    height: 2px;
+    background: linear-gradient(90deg, 
+        var(--accent) 0%,
+        rgba(0, 217, 255, 0.5) 50%,
+        transparent 100%);
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.gdd-section {
+    margin-bottom: 3rem;
+}
+
+.gdd-section h2 {
+    color: var(--fg2);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.gdd-card {
+    background: rgba(11, 15, 20, 0.8);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.gdd-card:hover {
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+}
+
+.gdd-card h3 {
+    color: var(--accent);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.gdd-card p {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.cyber-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cyber-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--muted);
+}
+
+.cyber-list li:before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: monospace;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 200px;
+    background: rgba(207, 0, 0, 0.1);
+    border: 1px dashed var(--fg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* 添加响应式设计 */
+@media (max-width: 768px) {
+    .gdd-container {
+        padding: 1rem;
+    }
+    
+    .gdd-header h1 {
+        font-size: 2rem;
+    }
+    
+    .gdd-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .gdd-card {
+        padding: 1.5rem;
+    }
+}
+
+/* 添加动画效果 */
+.gdd-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
