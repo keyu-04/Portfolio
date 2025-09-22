@@ -1,10 +1,21 @@
 /* Programs page styles */
 
+/* ========== Cyberpunk polish for Programs ========== */
 .prog-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   color: var(--fg);
+  position: relative;
+  isolation: isolate;
+}
+.prog-container::before{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:-1;
+  background:
+    repeating-linear-gradient(to bottom, rgba(207,0,0,.035) 0 1px, transparent 1px 3px),
+    radial-gradient(1000px 500px at 0% 0%, rgba(0,217,255,.07), transparent 60%),
+    radial-gradient(900px 450px at 100% 100%, rgba(207,0,0,.07), transparent 60%);
+  mix-blend-mode: screen;
 }
 
 .prog-header h1 {
@@ -12,7 +23,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0 0 .5rem 0;
-  color: var(--accent);
+  color: var(--fg2);
   text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
 }
 
@@ -27,18 +38,22 @@
 }
 
 .prog-card {
-  background: rgba(11, 15, 20, 0.8);
-  border: 1px solid var(--accent);
+  background: linear-gradient(180deg, rgba(11,15,20,.85), rgba(11,15,20,.72));
+  border: 1px solid rgba(0,217,255,.35);
   border-radius: 6px;
   padding: 1.5rem;
   margin: 2rem 0;
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
-  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.12);
+  transition: box-shadow .25s ease, transform .12s ease;
+  position: relative;
 }
+.prog-card:hover { box-shadow: 0 0 30px rgba(0, 217, 255, 0.22); transform: translateY(-2px); }
 
-.prog-card:hover {
-  box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
-}
+/* decorative corners */
+.prog-card::before,
+.prog-card::after { content:""; position:absolute; width:26px; height:26px; border:1px solid var(--accent); opacity:.7; }
+.prog-card::before { left:-1px; top:-1px; border-right:0; border-bottom:0; border-top-left-radius:6px; }
+.prog-card::after { right:-1px; bottom:-1px; border-left:0; border-top:0; border-bottom-right-radius:6px; }
 
 .prog-card-header h2 {
   color: var(--fg2);
@@ -69,7 +84,7 @@
   gap: .5rem;
   padding: .5rem .75rem;
   border-bottom: 1px solid rgba(0, 217, 255, 0.25);
-  background: rgba(0, 217, 255, 0.05);
+  background: linear-gradient(90deg, rgba(0,217,255,.08), rgba(0,0,0,.05));
 }
 
 .filename { color: var(--accent); letter-spacing: .5px; font-weight: 600; }
@@ -128,3 +143,25 @@
   .prog-header h1 { font-size: 1.8rem; }
   .prog-card { padding: 1rem; }
 }
+/* Web fonts for CP2077-like typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* Page-scoped theme variables + typography */
+body.theme-cp {
+  --bg:#0b0f14;
+  --fg:#d7e2ea;
+  --fg2:#ffb400;
+  --accent:#00eaff;
+  --muted:#7aa1c0;
+
+  background:
+    radial-gradient(1000px 520px at 20% 0%, rgba(0,234,255,.12), transparent 60%),
+    linear-gradient(180deg, #0c121a 0%, #0a0e16 60%, #07090f 100%);
+  color: var(--fg);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+}
+body.theme-cp h1, body.theme-cp h2, body.theme-cp h3, body.theme-cp h4 { font-family: Rajdhani, Inter, Arial, sans-serif; font-weight: 700; }
+body.theme-cp .filename, body.theme-cp code, body.theme-cp pre { font-family: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }

@@ -1,10 +1,21 @@
 /* Visuals page styles */
 
+/* ========== Cyberpunk polish for Visuals ========== */
 .vis-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   color: var(--fg);
+  position: relative;
+  isolation: isolate;
+}
+.vis-container::before{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:-1;
+  background:
+    repeating-linear-gradient(to bottom, rgba(207,0,0,.035) 0 1px, transparent 1px 3px),
+    radial-gradient(1100px 520px at 0% 0%, rgba(0,217,255,.07), transparent 60%),
+    radial-gradient(1000px 480px at 100% 100%, rgba(207,0,0,.07), transparent 60%);
+  mix-blend-mode: screen;
 }
 
 .vis-header h1 {
@@ -28,15 +39,22 @@
 
 /* Card */
 .vis-card {
-  background: rgba(11, 15, 20, 0.8);
-  border: 1px solid var(--accent);
+  background: linear-gradient(180deg, rgba(11,15,20,.85), rgba(11,15,20,.72));
+  border: 1px solid rgba(0,217,255,.35);
   border-radius: 6px;
   padding: 1.5rem;
   margin: 2rem 0;
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
-  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.12);
+  transition: box-shadow .25s ease, transform .12s ease;
+  position: relative;
 }
-.vis-card:hover { box-shadow: 0 0 30px rgba(0, 217, 255, 0.2); }
+.vis-card:hover { box-shadow: 0 0 30px rgba(0, 217, 255, 0.22); transform: translateY(-2px); }
+
+/* decorative corners */
+.vis-card::before,
+.vis-card::after { content:""; position:absolute; width:26px; height:26px; border:1px solid var(--accent); opacity:.7; }
+.vis-card::before { left:-1px; top:-1px; border-right:0; border-bottom:0; border-top-left-radius:6px; }
+.vis-card::after { right:-1px; bottom:-1px; border-left:0; border-top:0; border-bottom-right-radius:6px; }
 
 .vis-card-header h2 {
   color: var(--fg2);
@@ -148,3 +166,24 @@
   .vis-card { padding: 1rem; }
   .art-item { grid-template-columns: 1fr; }
 }
+/* Web fonts for CP2077-like typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@500;600;700&display=swap');
+
+/* Page-scoped theme variables + typography */
+body.theme-cp {
+  --bg:#0b0f14;
+  --fg:#d7e2ea;
+  --fg2:#ffb400;
+  --accent:#00eaff;
+  --muted:#7aa1c0;
+
+  background:
+    radial-gradient(1000px 520px at 20% 0%, rgba(0,234,255,.12), transparent 60%),
+    linear-gradient(180deg, #0c121a 0%, #0a0e16 60%, #07090f 100%);
+  color: var(--fg);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+}
+body.theme-cp h1, body.theme-cp h2, body.theme-cp h3, body.theme-cp h4 { font-family: Rajdhani, Inter, Arial, sans-serif; font-weight: 700; }
