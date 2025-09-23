@@ -10,7 +10,7 @@
 <div class="gdd-container">
     <div class="gdd-header">
         <h1>Game Design Document</h1>
-        <p class="small sub">Reference sheet · structure · style</p>
+        <h1>Projet Alpha</h1>
         <div class="accent-line"></div>
     </div>
     
@@ -18,16 +18,14 @@
         <div class="gdd-section">
             <div class="gdd-card">
                 <h2>Aperçu</h2>
-                <h3>Game Title</h3>
-                <p>[Your Game Title]</p>
                 
                 <h3>Gameplay clé</h3>
                 <p>Vue du dessus, infiltration et tir ; combats en temps réel à haut risque ; 
                     limitation du champ de vision par “brouillard de guerre” ; éclairage dynamique et gestion de la discrétion ;
-                     multiples itinéraires d’infiltration favorisant la réflexion tactique.</p>
+                     multiples itinéraires d'infiltration favorisant la réflexion tactique.</p>
                 
                 <h3>Joueurs visés</h3>
-                <p>Joueurs attirés par l’infiltration, le tir, la stratégie de terrain et la gestion de ressources.</p>
+                <p>Joueurs attirés par l'infiltration, le tir, la stratégie de terrain et la gestion de ressources.</p>
                 
                 <h3>Synopsis</h3>
                 <p>
@@ -36,11 +34,11 @@
                      contextuelles en combat.</p>
                 
                 <h3>Concept central</h3>
-                <p>Par le récit, le gameplay (économie) et l’art, l’expérience cherche à instaurer une pression oppressante, 
+                <p>Par le récit, le gameplay (économie) et l'art, l'expérience cherche à instaurer une pression oppressante, 
                     puis à permettre une “décharge” émotionnelle via les combats et les liens noués avec les PNJ. 
                     Cette pression met en avant les zones grises morales, 
                     ces relations servent de base à des tragédies marquantes.
-                    « In Cyberpunk, you don’t win. You survive. » — Mike Pondsmith.</p>
+                    « In Cyberpunk, you don't win. You survive. » — Mike Pondsmith.</p>
 
                 <h3>Ce qui rend le jeu unique</h3>
                 <p>Progression non linéaire, pression de survivre dans une mégalopole,
@@ -60,32 +58,77 @@
                 <h3>Boucle centrale (Core Loop)</h3>
                 <p>Le jeu alterne phase de repos et phase de combat.</p>
                 <ul class="cyber-list">
-                    <li>Repos : exploration d’un micro-univers servant de hub (dialogues PNJ, recherche de contrats et d’informations associées).</li>
-                    <li>Combat : après acceptation d’un contrat, lancement du niveau. À la réussite : récompense, puis retour au hub pour poursuivre le cycle.</li>
+                    <li>Repos : exploration d'un micro-univers servant de hub (dialogues PNJ, recherche de contrats et d'informations associées).</li>
+                    <li>Combat : après acceptation d'un contrat, lancement du niveau. À la réussite : récompense, puis retour au hub pour poursuivre le cycle.</li>
                 </ul>
 
                 <h3>Objectifs</h3>
                 <p>Objectif central : survivre dans la métropole et dévoiler les arcs narratifs des PNJ pour débloquer les fins.</p>
                 <ul class="cyber-list">
-                    <li>Survie : s’appuyer sur une petite économie dynamique ; accepter régulièrement des contrats pour financer nourriture, équipement et logement/crédit.</li>
-                    <li>Histoire : la progression narrative s’imbrique dans la boucle en cherchant contrats, renseignements et objets, le joueur débloque des intrigues PNJ ; les fins dépendent de leur avancement.</li>
+                    <li>Survie : s'appuyer sur une petite économie dynamique ; accepter régulièrement des contrats pour financer nourriture, équipement et logement/crédit.</li>
+                    <li>Histoire : la progression narrative s'imbrique dans la boucle en cherchant contrats, renseignements et objets, le joueur débloque des intrigues PNJ ; les fins dépendent de leur avancement.</li>
                 </ul>
 
                 <h3>Défis</h3>
                 <p>Pression financière et niveaux exigeants constituent les principaux défis</p>
 
                 <h3>Progression (Progression System)</h3>
-                <p>La montée en puissance provient surtout de l’équipement (achats, dons de PNJ) mais egalement
+                <p>La montée en puissance provient surtout de l'équipement (achats, dons de PNJ) mais egalement
                 du lien avec les PNJ: ils apportent des soutiens spécifiques en mission.</p>
 
 
-    <h2>Visual Style</h2>
-                    <div class="image-placeholder">
-                        [Game Visual Reference]
-                    </div>
-                    <p>[Description of visual style and art direction]</p>
-                </div>
+                <h2>Systèmes principaux</h2>
+                <h3>Combat</h3>
+                <ul class="cyber-list">
+                    <li>Le tir est central : les armes à feu permettent d'éliminer à distance, mais le sang laissé sur le sol alerte d'autres ennemis.</li>
+                    <li>Les armes sont hautement létales : une balle peut suffire.</li>
+                    <li>Le mouvement élargit la dispersion du réticule.</li>
+                    <li>Éliminations discrètes au corps-à-corps (poignard/garrot) sans traces de sang.</li>
+                </ul>
+                
+                <h3>Vision</h3>
+                <p>La carte est couverte par un brouillard de guerre. Le joueur ne voit que :</p>
+                <ul class="cyber-list">
+                    <li>un cône frontal large</li>
+                    <li>un petit cercle autour de soi.</li>
+                </ul>
+                    
+                <h3>Infiltration</h3>
+                <ul class="cyber-list">
+                    <li>Opposition lumière/ombre : on peut briser/éteindre des sources lumineuses ou obstruer des ouvertures pour rester dans l'ombre → détection réduite.</li>
+                    <li>Les actions génèrent du bruit (déplacement, franchissement, ouverture de porte, tir) ; les ennemis enquêtent vers la source.</li>
+                    <li>Possibilités d'appâts/leurres : lancer une bouteille, couper l'alimentation, provoquer le chaos.</li>
+                </ul>
 
+                <h2>IA ennemis</h2>
+                <h3>Canaux de perception</h3>
+                <ul class="cyber-list">
+                    <li>Vue : détection dans un cône frontal ; influencée par la lumière ; rayons de vision bloqués par les murs.</li>
+                    <li>Ouïe : rayon circulaire ; atténuation derrière les obstacles ; un bruit fait monter une jauge de suspicion, orientant le regard ou le déplacement vers l'origine.</li>
+                    <li>Autres indices : corps, sang, pièges déclenchés, caméras en alerte, etc.</li>
+                </ul>
+
+                <h3>Machine à états</h3>
+                <ul class="cyber-list">
+                    <li>Patrol (patrouille) : parcours de waypoints ou garde statique ; faible vigilance (micro-arrêts face aux petits bruits).</li>
+                    <li>Suspicious (soupçon) : signaux légers (bruit lointain, variation de lumière) → orientation/observation brèves, approche lente du point d'origine ; cumul d'une jauge de détection en cas de répétition.</li>
+                    <li>Investigate(recherche) : déplacement vers le point ; balayage d'une zone (par cône ou multi-points courts) avec arrêts sur des positions clés.</li>
+                    <li>Alert (alerte) : forte suspicion ou multiples témoins → diffusion d'alerte, points de blocage, appel de renforts ; intensification et élargissement de la recherche.</li>
+                    <li>Combat : si la position (ou la dernière connue) du joueur est établie et que l'engagement est pertinent → tir à distance, couverture, charge selon le profil. Perte de contact : retour vers Search/Alert.</li>
+                    <li>Return to Patrol : sans nouvel indice, décroissance progressive de la jauge puis reprise du cycle de patrouille.</li>
+                </ul>
+                
+                <h3>Économie dynamique</h3>
+                <ul class="cyber-list">
+                    <li>Revenus : contrats ; négoce/achat-revente.</li>
+                    <li>Dépenses : loyer ; nourriture ; armes et munitions ; soins ; assurance.</li>
+                    <li>Objectif : restituer un flux monétaire crédible, forçant des choix.</li>
+                </ul>
+                <h2></h2>
+                <div>   
+                <a class="btn2" href="home.html">Voir le visuel</a>
+                <a class="btn2" href="home.html">Voir l'histoire</a>
+                </div>
             </div>
         </div>
 

@@ -26,15 +26,104 @@
         <div class="code-toolbar">
           <span class="filename">main.py</span>
           <span class="flex-spacer"></span>
-          <button class="btn btn-toggle" type="button">折叠</button>
-          <button class="btn btn-copy" type="button">复制</button>
         </div>
         <div class="code-scroll">
-          <pre class="code-block" aria-label="main.py"><code># 在这里粘贴 main.py 代码
-# 例如：游戏主循环、事件处理、渲染逻辑等
+          <pre class="code-block" aria-label="main.py"><code>
+import pyxel
+from random import randint
 
-# 提示：如需展示多文件，可复制整个 .prog-code 区块
-# 修改上方文件名，并粘贴对应代码
+#constants
+WIDTH = 200
+HEIGHT = 160
+CASE = 10
+
+
+#variables
+snake = [[3,3],[2,3],[1,3]]
+score = 0
+FRAME_REFRESH = 15
+direction = [1,0]
+head = [snake[0][0] + direction[0], snake[0][1] + direction[1]]
+food = [randint(0,int(WIDTH/CASE - 1)), randint(0,int(HEIGHT/CASE - 1))]
+bgm_timer = 30
+
+#initiation
+def init():
+    pyxel.init(WIDTH, HEIGHT,title="snake")
+
+    pyxel.load("My_p_resource.pyxres")
+
+    pyxel.play(0,0)
+
+
+#fonctions
+def update():
+    global direction,food,score,snake, FRAME_REFRESH,bgm_timer
+
+    if bgm_timer > 0:
+        bgm_timer -= 1
+    elif bgm_timer == 0:
+        pyxel.playm(0, loop=True)
+        bgm_timer = -1
+
+    # detect l'action du joueur
+    if pyxel.btn(pyxel.KEY_ESCAPE):
+        exit()
+    elif pyxel.btn(pyxel.KEY_RIGHT) and direction in ([0, 1], [0, -1]):
+        direction = [1, 0]
+    elif pyxel.btn(pyxel.KEY_LEFT) and direction in ([0, 1], [0, -1]):
+        direction = [-1, 0]
+    elif pyxel.btn(pyxel.KEY_UP) and direction in ([1, 0], [-1, 0]):
+        direction = [0, -1]
+    elif pyxel.btn(pyxel.KEY_DOWN) and direction in ([1, 0], [-1, 0]):
+        direction = [0, 1]
+
+    #mis a jour du data du serpent
+    if pyxel.frame_count % FRAME_REFRESH == 0:
+        head = [snake[0][0] + direction[0], snake[0][1] + direction[1]]
+        snake.insert(0, head)
+
+        print(snake)
+        #si le serpent a toucher la pomme
+        if food in snake:
+            food = [randint(0, int(WIDTH / CASE - 1)), randint(0, int(HEIGHT / CASE - 1))]
+            score += 1
+            pyxel.play(0, 2,resume = True)
+            if FRAME_REFRESH > 5: #le serpent va etre de plus en plus vite
+                FRAME_REFRESH -= score
+        else:
+            snake.pop(-1) #ne pas supprimer le dernier donner si le serpend a manger la pomme
+
+        #detect si toucher son corp ou toucher le bord
+        if head in snake[1:] or head[0] < 0 or head[0] > WIDTH/CASE - 1 or head[1] < 0 or head[1] > HEIGHT/CASE - 1:
+            pyxel.play(0, 3,)
+            quit()
+
+
+
+
+def draw():
+    #effacer tout les contenus de l'ecrant
+    pyxel.cls(0)
+    #dessiner le score
+    pyxel.text(4,4,f"score:{score}", 7)
+
+    #dessiner le sarpent
+    for anneau in snake[1:]:
+        x,y = anneau[0],anneau[1]
+        pyxel.rect(x * CASE,y * CASE, CASE, CASE,11)
+
+    x_head, y_head = snake[0]
+    pyxel.rect(x_head * CASE, y_head * CASE, CASE, CASE,9)
+
+    #dessiner la pomme
+    pyxel.rect(food[0]*CASE, food[1]*CASE, CASE, CASE,8)
+
+#executuion
+
+init()
+pyxel.run(update, draw)
+
 </code></pre>
         </div>
       </div>
@@ -45,8 +134,8 @@
         </div>
         <p class="small demo-note">可替换为 <code>&lt;video&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;iframe&gt;</code> 或 WebGL/canvas。设置 <code>data-demo-src</code> 也可一键插入 iframe。</p>
         <div class="demo-actions">
-          <button class="btn demo-run" type="button">播放演示</button>
-          <a class="btn demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
+          <button class="btn2 demo-run" type="button">播放演示</button>
+          <a class="btn2 demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
         </div>
       </div>
     </div>
@@ -54,21 +143,128 @@
 
   <section class="prog-card" id="game-2">
     <header class="prog-card-header">
-      <h2>示例：小游戏 2</h2>
-      <p class="small">可以继续添加更多卡片，每个卡片独立展示一个项目。</p>
+      <h2>MORPION</h2>
+      <p class="small">Un jeu de morpion classique codé en python. Il se jou à deux, le programme identifira automatiquement le gagnant.</p>
     </header>
 
     <div class="prog-grid">
       <div class="prog-code" data-filename="game.py">
         <div class="code-toolbar">
-          <span class="filename">game.py</span>
+          <span class="filename">morpion</span>
           <span class="flex-spacer"></span>
-          <button class="btn btn-toggle" type="button">折叠</button>
-          <button class="btn btn-copy" type="button">复制</button>
         </div>
         <div class="code-scroll">
-          <pre class="code-block" aria-label="game.py"><code># 在这里粘贴另一个文件的代码
-# 可用于演示更复杂的项目结构
+          <pre class="code-block" aria-label="game.py"><code>
+from random import randint
+map = [[" "," "," "],[" "," "," " ],[" "," "," "]]
+
+def detect_n (t,x,y,j):
+    if t[y][0] == j and t[y][1] == j and t[y][2] == j:
+        return True
+    elif t[0][x] == j and t[1][x] == j and t[2][x] == j:
+        return True
+    else:
+        return False
+
+def detect_sp(t,x,y,j):
+    if x == 0 and y == 0:
+        if t[0][0] == j and t[1][1] == j and t[2][2] == j:
+            return True
+        elif detect_n(t,x,y,j) == True:
+            return True
+    elif x == 2 and y == 2:
+        if t[0][0] == j and t[1][1] == j and t[2][2] == j:
+            return True
+        elif detect_n(t,x,y,j) == True:
+            return True
+    elif x == 2 and y == 0:
+        if t[0][2] == j and t[1][1] == j and t[2][0] == j:
+            return True
+        elif detect_n(t,x,y,j) == True:
+            return True
+    elif x == 0 and y == 2:
+        if t[0][2] == j and t[1][1] == j and t[2][0] == j:
+            return True
+        elif detect_n(t,x,y,j) == True:
+            return True
+    elif x == 1 and y == 1:
+        if t[0][0] == j and t[1][1] == j and t[2][2] == j:
+            return True
+        elif t[0][2] == j and t[1][1] == j and t[2][0] == j:
+            return True
+        elif detect_n(t,x,y,j) == True:
+            return True
+    else:
+        if detect_n(t,x,y,j) == True:
+            return True
+        else:
+            return False
+            
+def player_keyboard(n):
+    if n == "1":
+        return (2,0)
+    elif n == "2":
+        return (2,1)
+    elif n == "3":
+        return (2,2)
+    elif n == "4":
+        return (1,0)
+    elif n == "5":
+        return (1,1)
+    elif n == "6":
+        return (1,2)
+    elif n == "7":
+        return (0,0)
+    elif n == "8":
+        return (0,1)
+    elif n == "9":
+        return (0,2)
+        
+def plaied(x,y,j):
+    if map[x][y] == "O" or map[x][y] == "X":
+        print("non")
+    map[x][y] = j
+    if detect_sp(map,y,x,j) == True:
+        for i in range(3):
+            print ("|", map[i][0],"|", map[i][1],"|", map[i][2],"|")
+            print("-------------")
+        print("Partie finie, le joueur",j ,"a gagné")
+        
+    
+fin = False
+nombre = 0
+
+while fin == False:
+    for i in range(3):
+        print ("|", map[i][0],"|", map[i][1],"|", map[i][2],"|")
+        print("-------------")
+        
+    a = str(input())
+    nombre += 1
+    b = player_keyboard(a)
+    plaied(b[0],b[1],"O")
+    if detect_sp(map,b[1],b[0],"O") == True:
+        fin = True
+        break
+        
+    for i in range(3):
+        print ("|", map[i][0],"|", map[i][1],"|", map[i][2],"|")
+        print("-------------")
+    
+    if nombre == 9:
+        print("match nul")
+        break
+    
+    c = str(input())
+    nombre += 1
+    d = player_keyboard(c)
+    plaied(d[0],d[1],"X")
+    if detect_sp(map,d[1],d[0],"X") == True:
+        fin = True
+        
+    if nombre == 9:
+        print("match nul")
+        break
 </code></pre>
         </div>
       </div>
@@ -79,43 +275,376 @@
         </div>
         <p class="small demo-note">如果是本地 HTML 演示页面，可将路径填入 <code>data-demo-src</code> 或“新窗口打开”链接。</p>
         <div class="demo-actions">
-          <button class="btn demo-run" type="button">播放演示</button>
-          <a class="btn demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
+          <button class="btn2 demo-run" type="button">播放演示</button>
+          <a class="btn2 demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
         </div>
       </div>
     </div>
   </section>
 
+
+<section class="prog-card" id="game-2">
+    <header class="prog-card-header">
+      <h2>PROJET NDC</h2>
+      <p class="small">Un jeu codé à la Nuit du Code, un marathon de programmation de 6 heurs. Avec Pyxel en python</p>
+    </header>
+
+    <div class="prog-grid">
+      <div class="prog-code" data-filename="game.py">
+        <div class="code-toolbar">
+          <span class="filename">morpion</span>
+          <span class="flex-spacer"></span>
+        </div>
+        <div class="code-scroll">
+          <pre class="code-block" aria-label="game.py"><code>
+import time
+
+import pyxel
+from random import randint
+
+pyxel.init(160, 80, title="NDC", )
+pyxel.load("2.pyxres")
+camera_x = 0
+camera_y = 0
+size = 8
+vie = 3
+x_vie = 0
+map_x = 20
+map_y = 10
+x = 50
+y = 50
+direction = 1
+direction_p = 1
+vy = 0
+is_vie = True
+x_mob = 120
+x_projectile = 120
+y_projectile = 56
+score = 0
+x_mob2 = randint(5,150)
+y_mob2 = 0
+mort = False
+mort2 = False
+cd_attack = 0
+cd_projectile = 0
+jump_force = -5
+gravity = 1
+is_jumping = False
+is_projectile = True
+is_mob = True
+is_mob2 = True
+is_attacking = False
+can_attack = True
+can_shot = True
+can_respawn2 = False
+cd_respawn2 = 0
+cd_attack_confirm = 0
+cd_projectile_confirm = 0
+cd_respawn2_confirm = 0
+mob2_dead_time = 0
+game_over = False
+game_started = False
+current_zone = ""
+
+def start_menu():
+    global game_started
+    if pyxel.btnp(pyxel.KEY_RETURN):
+        game_started = True
+
+
+def inputs():
+    global x, direction
+    if pyxel.btn(pyxel.KEY_RIGHT) and x < 562:
+        x += 1
+        direction = 1
+    elif pyxel.btn(pyxel.KEY_LEFT) and x > 0:
+        x -= 1
+        direction = 2
+    if pyxel.btnp(pyxel.KEY_S):
+        save_game()
+    if pyxel.btnp(pyxel.KEY_L):
+        load_game()
+
+def recup_vie():
+    global x_vie, vie, is_vie
+    if is_vie:
+        x_vie = randint(5,150)
+        is_vie = False
+    if abs(x_vie - x) < 2 and vie < 3:
+        pyxel.play(0, 3)
+        vie += 1
+        is_vie = True
+
+
+
+def mob_spawn():
+    global x_mob, x, is_mob, mort, score
+
+
+    if not is_mob:
+        mort = True
+
+    if mort:
+        score +=10
+        x_mob = randint(5, 145)
+        while abs(x_mob - x) < 40:
+            x_mob = randint(5,145)
+        mort = False
+        is_mob = True
+
+def mob2_spawn():
+    global x_mob2, y_mob2, is_mob2, vie, score, mob2_dead_time
+
+    if is_mob2:
+
+        if x_mob2 > x:
+            x_mob2 -= 0.5
+        elif x_mob2 < x:
+            x_mob2 += 0.5
+
+        if y_mob2 < 50:
+            y_mob2 += 3
+        else:
+            y_mob2 = 50
+
+
+    if abs(x_mob2 - x) < 1 and abs(y_mob2 - y) < 1:
+            vie -= 1
+            pyxel.play(1, 1)
+            is_mob2 = False
+            mob2_dead_time = time.time()
+            y_mob2 = 0
+            score += 5
+    if time.time() - mob2_dead_time > 2 and not is_mob2:
+            is_mob2 = True
+            mob2_dead_time = 0
+            y_mob2 = 0
+            x_mob2 = randint(5, 145)
+            while abs(x_mob2 - x) < 40:
+                x_mob2 = randint(5, 145)
+
+
+def jump():
+    global y, vy, gravity, is_jumping, jump_force, size, mob2_dead_time
+
+    if pyxel.btn(pyxel.KEY_UP) and not is_jumping:
+        vy = jump_force
+        y += vy
+        is_jumping = True
+
+    """
+    if map[(y - 8) // size][x // size] == 1:
+        vy = 0
+        is_jumping = False
+        """
+    if y < 50:
+        vy += gravity
+        y += vy
+    if y >= 50:
+        vy = 0
+        y = 50
+        is_jumping = False
+
+
+def attack():
+    global x, is_attacking,direction, is_mob, is_mob2, cd_attack, can_attack, mob2_dead_time, y_mob2, score
+    if is_attacking:
+        pyxel.play(0,0)
+        is_attacking = False
+    if pyxel.btn(pyxel.KEY_SPACE) and not is_attacking and x < 562 and x > 0 and can_attack:
+        is_attacking = True
+        cd_attack = time.time()
+        can_attack = False
+        if direction == 1:
+            x += 2
+        else:
+            x -= 2
+    if is_attacking == True and x - x_mob <= 8 and x - x_mob >= -8 :
+        is_mob = False
+    if is_attacking == True and x - x_mob2 <= 8 and x - x_mob2 >= -8 :
+        is_mob2 = False
+        mob2_dead_time = time.time()
+        y_mob2 = 0
+        score += 5
+
+def is_offscreen(obj_x, margin=3):
+    return obj_x < camera_x - margin or obj_x > camera_x + pyxel.width + margin
+
+
+def projectile():
+    global x_mob, x_projectile, is_projectile, y, y_projectile, vie, direction_p, cd_projectile, camera_x
+
+    if not is_projectile and (time.time() - cd_projectile > 2):
+        x_projectile = x_mob
+        is_projectile = True
+        cd_projectile = time.time()
+        if x_mob < x:
+            direction_p = 2
+        else:
+            direction_p = 1
+
+    if is_projectile:
+        if direction_p == 2:
+            x_projectile += 2
+        else:
+            x_projectile -= 2
+
+        if abs(x_projectile - x) <= 2 and y >= 46:
+            is_projectile = False
+            x_projectile = 0
+            vie -= 1
+            pyxel.play(1, 1)
+
+    if is_offscreen(x_projectile):
+        is_projectile = False
+        x_projectile = 0
+
+def scoree():
+    global score, game_over
+    print(score)
+    if vie <= 0:
+        game_over = True
+
+def restart_game():
+    global x, y, vie, score, x_mob, x_mob2, y_mob2, is_mob, is_mob2, game_over
+    x, y = 50, 50
+    vie = 3
+    score = 0
+    x_mob = 120
+    x_mob2 = randint(5, 150)
+    y_mob2 = 0
+    is_mob = True
+    is_mob2 = True
+    game_over = False
+
+def check_game_over():
+    global game_over, vie, x
+    while vie == 0:
+        pyxel.play(2, 2)
+        vie = -1
+    if vie <= 0:
+        game_over = True
+        x = 2000
+    if pyxel.btnp(pyxel.KEY_R):
+        restart_game()
+    elif pyxel.btnp(pyxel.KEY_Q):
+        pyxel.quit()
+
+def save_game():
+    with open("save.txt", "w") as f:
+        f.write(f"{x},{y},{vie},{score},{current_zone}\n")
+    print("Sauvegarde effectuée.")
+
+def load_game():
+    global x, y, vie, score, current_zone, game_started
+    try:
+        game_started = True
+        with open("save.txt", "r") as f:
+            data = f.readline().strip().split(",")
+            x = int(data[0])
+            y = int(data[1])
+            vie = int(data[2])
+            score = int(data[3])
+            current_zone = data[4]
+        print("Sauvegarde chargée.")
+    except FileNotFoundError:
+        print("Aucune sauvegarde trouvée.")
+
+def cooldown():
+    global cd_attack, can_attack, cd_projectile, can_shot, cd_projectile_confirm, cd_respawn2, can_respawn2
+    if time.time() - cd_attack > 0.5:
+        can_attack = True
+
+def update_camera():
+    global camera_x, camera_y
+
+    camera_x = x - pyxel.width // 2
+    camera_y = y - pyxel.height // 2
+
+    camera_x = max(0, min(camera_x, 576 - pyxel.width))  #256 = largeur de la map
+    camera_y = max(0, min(camera_y, 576 - pyxel.height)) #256 = hauteur de la map
+
+def detect_zone():
+    global current_zone
+    if 0 <= x < 576 and 0 <= y < 128:
+        current_zone = "palace entrance"
+    else:
+        current_zone = "unknown"
+
+def update():
+    if not game_started: #permet de faire apparaitre et disparaitre le menu de start
+        start_menu()
+        return
+    scoree() #le score
+    mob2_spawn() #le spawn mob combat
+    attack() # l'attaque
+    inputs() #les inputs du joueur
+    projectile() #le projectile
+    jump() #le jump
+    mob_spawn() #le spawn mob archer
+    recup_vie() #fonction des vies
+    cooldown() #le cooldown
+    check_game_over()#gere le game over
+    update_camera() #pour centrer la cam sur le joueur
+    detect_zone() #determine la zone dans laquelle est le joueur
+
+def draw():
+    if not game_started: #affiche le menu de debut, et affiche le reste du jeu ssi le joueur appuie entrée
+        pyxel.cls(0)
+        pyxel.text(50 , 30 , "KNIGHT FIGHT", 8)
+        pyxel.text(25 , 50 , "Appuie sur ENTREE pour jouer une nouvelle partie", 7)
+        pyxel.text(25, 60, "Appuie sur L pour reprendre votre jeu", 7)
+        return
+    pyxel.cls(0)
+    pyxel.bltm(0, 0, 0, camera_x, camera_y, 256, 256 ) #la map
+    pyxel.text(5, 70, "Appuie sur S pour sauvegarder", 7)
+
+    pyxel.blt(x - camera_x, y - camera_y, 0, 0, 16, 16, 16, 2) # player
+    if vie > 0 :
+        pyxel.blt(4, 16, 0, 112, 48, 16, 16, 2) #vie 1
+    if vie > 1:
+        pyxel.blt(15, 16, 0, 112, 48, 16, 16, 2) #vie 2
+    if vie > 2 :
+        pyxel.blt(26, 16, 0, 112, 48, 16, 16, 2) #vie 3
+    if is_mob:
+        if is_projectile:
+            pyxel.blt(x_projectile - camera_x, y_projectile - camera_y ,0, 128, 62, 16 ,16, 2) #le projectile
+        pyxel.blt(x_mob - camera_x, 50 - camera_y, 0, 64, 16, 16, 16, 2) #le mob archer
+    if is_mob2:
+        pyxel.blt(x_mob2 - camera_x, y_mob2 - camera_y, 0, 64, 16, 16, 16, 2) #le mob combat
+    if game_over: #permet d'afficher l'écran de fin
+        pyxel.rect(30, 20 , 100, 40, 0)
+        pyxel.text(60 , 30 , "GAME OVER", 8)
+        pyxel.text(45 , 40 , f"Score final : {score}", 7)
+        pyxel.text(35, 50, "R pour rejouer, Q pour quitter", 13)
+    pyxel.blt(x_vie - camera_x, 50 - camera_y, 0, 112, 48, 16, 16, 2) #spawn des vies sur le terrain
+    pyxel.text(4, 12, f"zone: {current_zone}", 6) #Nom de la zone actuelle
+    pyxel.text(4, 4, f"score:{score}", 7) #le score
+
+pyxel.run(update, draw)
+
+</code></pre>
+        </div>
+      </div>
+
+      <div class="prog-demo" data-demo-src="">
+        <div class="demo-placeholder">
+          演示占位（替换为你的视频/GIF/网页）
+        </div>
+        <p class="small demo-note">如果是本地 HTML 演示页面，可将路径填入 <code>data-demo-src</code> 或“新窗口打开”链接。</p>
+        <div class="demo-actions">
+          <button class="btn2 demo-run" type="button">播放演示</button>
+          <a class="btn2 demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <script>
   (function () {
     const root = document.currentScript?.parentElement || document;
 
-    // 复制代码
-    root.querySelectorAll('.btn-copy').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const card = btn.closest('.prog-card');
-        const code = card?.querySelector('.code-block')?.innerText || '';
-        try {
-          await navigator.clipboard.writeText(code);
-          const old = btn.textContent;
-          btn.textContent = '已复制';
-          setTimeout(() => (btn.textContent = old), 1200);
-        } catch (e) {
-          alert('复制失败，请手动选择复制');
-        }
-      });
-    });
-
-    // 折叠/展开代码
-    root.querySelectorAll('.btn-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const box = btn.closest('.prog-code');
-        box?.classList.toggle('is-collapsed');
-        btn.textContent = box?.classList.contains('is-collapsed') ? '展开' : '折叠';
-      });
-    });
 
     // 播放演示（如果设置了 data-demo-src，则插入 iframe）
     root.querySelectorAll('.prog-demo').forEach(section => {

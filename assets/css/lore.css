@@ -23,7 +23,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0 0 .5rem 0;
-  color: var(--fg2);
+  color: var(--accent);
   text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
 }
 
