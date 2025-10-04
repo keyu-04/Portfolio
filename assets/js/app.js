@@ -30,13 +30,41 @@ if (!nav || !slider || !content || items.length === 0) {
   let currentFragment = null;  // 默认没有已加载片段
   let activeController = null; // 控制并发加载
 
-  async function loadFragment(url, { push = true } = {}) {
-    if (!url) return;
-    url = url.trim();                // 防止意外空格导致 404
-    if (url === currentFragment) {   // 已经是当前片段就不重复加载
-      if (push && (!history.state || history.state.fragment !== url)) {
-        history.pushState({ fragment: url }, '', `#${encodeURIComponent(url)}`);
+  async function loadFragment(rawUrl, { push = true, anchor = null } = {}) {
+    if (!rawUrl) return;
+    const raw = String(rawUrl).trim();
+    if (!raw) return;
+
+    const [base, ...anchorParts] = raw.split('#');
+    const fragment = base;
+    const targetAnchor = anchor ?? (anchorParts.length > 0 ? anchorParts.join('#') : null);
+
+    const pushStateIfNeeded = () => {
+      if (!push || !fragment) return;
+      const hashString = targetAnchor ? `${fragment}#${targetAnchor}` : fragment;
+      const encodedHash = encodeURIComponent(hashString);
+      const state = { fragment, anchor: targetAnchor };
+      if (!history.state || history.state.fragment !== fragment || history.state.anchor !== targetAnchor) {
+        history.pushState(state, '', `#${encodedHash}`);
       }
+    };
+
+    const scrollToAnchor = () => {
+      if (!targetAnchor) return;
+      const safeId = targetAnchor.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+      const el = content.querySelector(`[id="${safeId}"]`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    if (!fragment) {
+      pushStateIfNeeded();
+      scrollToAnchor();
+      return;
+    }
+
+    if (fragment === currentFragment) {
+      pushStateIfNeeded();
+      scrollToAnchor();
       return;
     }
 
@@ -46,7 +74,7 @@ if (!nav || !slider || !content || items.length === 0) {
     activeController = controller;
 
     try {
-      const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
+      const res = await fetch(fragment, { cache: 'no-store', signal: controller.signal });
       if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
       const html = await res.text();
 
@@ -55,22 +83,23 @@ if (!nav || !slider || !content || items.length === 0) {
       void content.offsetWidth;         // 触发重绘以重放动画
       content.classList.add('fade-in');
 
-      currentFragment = url;
-      if (push) history.pushState({ fragment: url }, '', `#${encodeURIComponent(url)}`);
+      currentFragment = fragment;
+      pushStateIfNeeded();
+      scrollToAnchor();
 
       if (typeof content.focus === 'function') {
         try { content.focus({ preventScroll: true }); } catch { content.focus(); }
       }
     } catch (err) {
       if (err.name === 'AbortError') return; // 被取消的请求不提示
-      content.innerHTML = `<h2>Erreur</h2><p>Impossible de charger: ${url}<br><small>${String(err)}</small></p>`;
+      content.innerHTML = `<h2>Erreur</h2><p>Impossible de charger: ${fragment}<br><small>${String(err)}</small></p>`;
       console.error('[app] Failed to load fragment:', err);
     } finally {
       if (activeController === controller) activeController = null;
     }
   }
 
-  function setActive(target, { push = true } = {}) {
+  function setActive(target, { push = true, anchor = null } = {}) {
     if (!target) return;
     const nextIndex = items.indexOf(target);
     if (nextIndex === -1) return;
@@ -93,7 +122,7 @@ if (!nav || !slider || !content || items.length === 0) {
     currentIndex = nextIndex;
 
     // 加载右侧内容
-    loadFragment(fragment, { push });
+    return loadFragment(fragment, { push, anchor });
   }
 
   // 事件绑定
@@ -131,14 +160,51 @@ if (!nav || !slider || !content || items.length === 0) {
     if (items[nextIndex]) setActive(items[nextIndex]);
   });
 
-  window.addEventListener('popstate', (ev) => {
-    const url = ev.state?.fragment || (location.hash ? decodeURIComponent(location.hash.slice(1)) : null);
-    if (!url) return;
-    const target = items.find(i => (i.dataset.fragment || '').trim() === url);
+  content.addEventListener('click', (ev) => {
+    if (ev.defaultPrevented) return;
+    if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+    const link = ev.target.closest('a[href]');
+    if (!link || !content.contains(link)) return;
+    if (link.target && link.target !== '_self') return;
+
+    let href = link.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('#')) {
+      href = href.slice(1);
+    }
+    if (!href.startsWith('fragments/')) return;
+
+    ev.preventDefault();
+
+    const [path, ...anchorParts] = href.split('#');
+    const anchor = anchorParts.length > 0 ? anchorParts.join('#') : null;
+    const target = items.find(i => (i.dataset.fragment || '').trim() === path);
+
     if (target) {
-      setActive(target, { push: false });
+      setActive(target, { anchor });
     } else {
-      loadFragment(url, { push: false });
+      loadFragment(path, { anchor });
+    }
+  });
+
+  window.addEventListener('popstate', (ev) => {
+    let raw = null;
+    if (ev.state?.fragment) {
+      raw = ev.state.anchor ? `${ev.state.fragment}#${ev.state.anchor}` : ev.state.fragment;
+    } else if (location.hash) {
+      raw = decodeURIComponent(location.hash.slice(1));
+    }
+
+    if (!raw) return;
+
+    const [path, ...anchorParts] = raw.split('#');
+    const anchor = anchorParts.length > 0 ? anchorParts.join('#') : null;
+    const target = items.find(i => (i.dataset.fragment || '').trim() === path);
+
+    if (target) {
+      setActive(target, { push: false, anchor });
+    } else {
+      loadFragment(path, { push: false, anchor });
     }
   });
 
@@ -167,8 +233,17 @@ if (!nav || !slider || !content || items.length === 0) {
 
   const fromHash = location.hash ? decodeURIComponent(location.hash.slice(1)) : null;
   if (fromHash) {
-    const target = items.find(i => (i.dataset.fragment || '').trim() === fromHash);
-    if (target) setActive(target, { push: false });
+    const [path, ...anchorParts] = fromHash.split('#');
+    const anchor = anchorParts.length > 0 ? anchorParts.join('#') : null;
+    const target = items.find(i => (i.dataset.fragment || '').trim() === path);
+    if (target) {
+      setActive(target, { push: false, anchor });
+    } else if (path) {
+      loadFragment(path, { push: false, anchor });
+    } else if (anchor) {
+      loadFragment(currentFragment || '', { push: false, anchor });
+    }
   }
 }
+
 

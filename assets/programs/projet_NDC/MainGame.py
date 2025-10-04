@@ -4,7 +4,7 @@ import pyxel
 from random import randint
 
 pyxel.init(160, 80, title="NDC", )
-pyxel.load("2.pyxres")
+pyxel.load("Main.pyxres")
 camera_x = 0
 camera_y = 0
 size = 8

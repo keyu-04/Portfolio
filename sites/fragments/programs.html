@@ -24,7 +24,7 @@
     <div class="prog-grid">
       <div class="prog-code" data-filename="main.py">
         <div class="code-toolbar">
-          <span class="filename">main.py</span>
+          <span class="filename">snake.py</span>
           <span class="flex-spacer"></span>
         </div>
         <div class="code-scroll">
@@ -128,15 +128,12 @@ pyxel.run(update, draw)
         </div>
       </div>
 
-      <div class="prog-demo" data-demo-src="">
-        <div class="demo-placeholder">
-          在这里放置演示：视频/GIF/iframe/canvas
-        </div>
-        <p class="small demo-note">可替换为 <code>&lt;video&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;iframe&gt;</code> 或 WebGL/canvas。设置 <code>data-demo-src</code> 也可一键插入 iframe。</p>
-        <div class="demo-actions">
-          <button class="btn2 demo-run" type="button">播放演示</button>
-          <a class="btn2 demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
-        </div>
+      <div class="prog-demo">
+        <video class="demo-media" autoplay muted loop playsinline>
+          <source src="../assets/demo/snake.mp4" type="video/mp4" />
+        </video>
+        <p class="small demo-note">Le jouer controle un serpend qui est au début court mais qui deviendra de pluis en plus long et rapide lorsqu'il mange la pomme(carré rouge).
+            A chaque fois le serpend mange une pomme, le joueur gagne un point. Le jeu terminera lorsque la tête du serpend touche son corp ou la bord du map.  </p>
       </div>
     </div>
   </section>
@@ -144,7 +141,7 @@ pyxel.run(update, draw)
   <section class="prog-card" id="game-2">
     <header class="prog-card-header">
       <h2>MORPION</h2>
-      <p class="small">Un jeu de morpion classique codé en python. Il se jou à deux, le programme identifira automatiquement le gagnant.</p>
+      <p class="small">Un jeu de morpion classique codé en python. </p>
     </header>
 
     <div class="prog-grid">
@@ -269,15 +266,11 @@ while fin == False:
         </div>
       </div>
 
-      <div class="prog-demo" data-demo-src="">
-        <div class="demo-placeholder">
-          演示占位（替换为你的视频/GIF/网页）
-        </div>
-        <p class="small demo-note">如果是本地 HTML 演示页面，可将路径填入 <code>data-demo-src</code> 或“新窗口打开”链接。</p>
-        <div class="demo-actions">
-          <button class="btn2 demo-run" type="button">播放演示</button>
-          <a class="btn2 demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
-        </div>
+      <div class="prog-demo">
+        <video class="demo-media" autoplay muted loop playsinline>
+          <source src="../assets/demo/morpion.mp4" type="video/mp4" />
+        </video>
+        <p class="small demo-note">Morpion qui se jou à deux, le programme identifira automatiquement le gagnant.</p>
       </div>
     </div>
   </section>
@@ -286,7 +279,7 @@ while fin == False:
 <section class="prog-card" id="game-2">
     <header class="prog-card-header">
       <h2>PROJET NDC</h2>
-      <p class="small">Un jeu codé à la Nuit du Code, un marathon de programmation de 6 heurs. Avec Pyxel en python</p>
+      <p class="small">Un jeu codé à la Nuit du Code (un marathon de programmation en 6 heurs. Avec Pyxel en python)</p>
     </header>
 
     <div class="prog-grid">
@@ -627,52 +620,18 @@ pyxel.run(update, draw)
         </div>
       </div>
 
-      <div class="prog-demo" data-demo-src="">
-        <div class="demo-placeholder">
-          演示占位（替换为你的视频/GIF/网页）
-        </div>
-        <p class="small demo-note">如果是本地 HTML 演示页面，可将路径填入 <code>data-demo-src</code> 或“新窗口打开”链接。</p>
-        <div class="demo-actions">
-          <button class="btn2 demo-run" type="button">播放演示</button>
-          <a class="btn2 demo-open" href="#" target="_blank" rel="noopener">新窗口打开</a>
-        </div>
+      <div class="prog-demo">
+        <video class="demo-media" autoplay muted loop playsinline>
+          <source src="../assets/demo/NDC.mp4" type="video/mp4" /></video>
+        <p class="small demo-note">Un jeu d'action 2d. Le joueur controle un chivalier avec une barre de vie de maximum trois coeur.
+             Le chevalier perd une coeur lorsqu'il touche un squelette ou une flech, il gagne une coeur quand il touche une coeur sur le map.
+            Le joueur peut attaquer avec le bouton "espace", Le chevalier avancera d'une courte distance et éliminera tous les ennemis touchés sans perdre de coeur.
+            Le joueur gagne 5 point lorsqu'il élimine un Guerrier squelette, 10 point lorsqu'il élimine un Archers squelettes.</p>
       </div>
     </div>
   </section>
 </div>
 
-<script>
-  (function () {
-    const root = document.currentScript?.parentElement || document;
-
-
-    // 播放演示（如果设置了 data-demo-src，则插入 iframe）
-    root.querySelectorAll('.prog-demo').forEach(section => {
-      const runBtn = section.querySelector('.demo-run');
-      const openBtn = section.querySelector('.demo-open');
-      const src = (section.getAttribute('data-demo-src') || '').trim();
-      if (src) openBtn?.setAttribute('href', src);
-
-      runBtn?.addEventListener('click', () => {
-        const hasEmbed = section.querySelector('iframe, video, img, canvas');
-        const srcNow = (section.getAttribute('data-demo-src') || '').trim();
-        if (!hasEmbed && srcNow) {
-          const iframe = document.createElement('iframe');
-          iframe.src = srcNow;
-          iframe.className = 'demo-frame';
-          iframe.loading = 'lazy';
-          iframe.setAttribute('title', '演示');
-          iframe.setAttribute('referrerpolicy', 'no-referrer');
-          const placeholder = section.querySelector('.demo-placeholder');
-          placeholder?.replaceWith(iframe);
-        } else if (!hasEmbed) {
-          runBtn.textContent = '请放入视频/图片/页面';
-          setTimeout(() => (runBtn.textContent = '播放演示'), 1500);
-        }
-      });
-    });
-  })();
-</script>
 
 </body>
 </html>
