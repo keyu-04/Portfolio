@@ -48,7 +48,6 @@
   transition: box-shadow .25s ease, transform .12s ease;
   position: relative;
 }
-.vis-card:hover { box-shadow: 0 0 30px rgba(0, 217, 255, 0.22); transform: translateY(-2px); }
 
 /* decorative corners */
 .vis-card::before,
@@ -100,8 +99,10 @@
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
+/* Portrait variant for vertical images */
+.art-portrait { aspect-ratio: 3 / 4; }
+
 .art img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.art:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0, 217, 255, .18); border-color: var(--accent); }
 
 /* Per-art note */
 .art-note {
@@ -115,6 +116,22 @@
 }
 .art-note h4 { margin: 0; font-size: 1.05rem; color: var(--accent); letter-spacing: .4px; }
 .art-note p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+.art-band { display: grid; gap: 1rem; }
+@media (min-width: 860px) {
+  .art-band { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.art-item-horizontal {
+  grid-template-columns: minmax(180px, 240px) 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+.art-item-horizontal .art { aspect-ratio: 1 / 1; }
+.art-item-horizontal .art-note {
+  padding: 1rem 1.1rem;
+  gap: .55rem;
+}
+.art-square { aspect-ratio: 1 / 1; }
 
 /* Placeholder styling for dev */
 .art-ph {
@@ -135,6 +152,40 @@
 .vis-side h3 { color: var(--accent); margin: 0 0 .5rem 0; letter-spacing: .5px; }
 .vis-desc { color: var(--muted); line-height: 1.6; margin: 0 0 .75rem 0; }
 
+/* Section-specific: Autre Arts uses full-width gallery under the intro */
+#project-b .vis-grid { grid-template-columns: 1fr; }
+#project-b .vis-side { order: 1; margin-bottom: .5rem; }
+#project-b .vis-gallery { order: 2; }
+
+.vis-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  align-self: stretch;
+}
+.art-item-feature {
+  padding: 0.85rem;
+  border: 1px solid rgba(0, 217, 255, 0.35);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.22);
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+.art-item-feature .art {
+  border: 1px solid rgba(0, 217, 255, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.12);
+}
+.art-item-feature .art-note {
+  background: rgba(0, 0, 0, 0.3);
+}
+.art-item-feature .vis-meta {
+  margin: 0 0 0.5rem 0;
+}
+.art-item-feature .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
 .vis-meta { list-style: none; margin: 0 0 1rem 0; padding: 0; }
 .vis-meta li { display: flex; gap: .5rem; margin: .35rem 0; color: var(--muted); }
 .vis-meta li span { min-width: 64px; color: var(--fg); font-weight: 600; letter-spacing: .25px; }
@@ -143,14 +194,7 @@
 .vis-actions { display: flex; gap: .5rem; }
 
 /* Button for details */
-.btn.btn-details {
-  border-color: var(--fg);
-  color: var(--fg);
-  box-shadow: 0 0 0 0 rgba(207, 0, 0, 0.35), inset 0 0 12px rgba(207, 0, 0, 0.12);
-}
-.btn.btn-details:hover {
-  box-shadow: 0 0 24px 2px rgba(207, 0, 0, 0.25), inset 0 0 16px rgba(207, 0, 0, 0.18);
-}
+.btn.btn-details { --btn-color: var(--fg); }
 
 /* Footer note */
 .vis-footer { margin: 1rem 0 0 0; color: var(--muted); }

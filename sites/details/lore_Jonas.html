@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Détail — Jonas Mercer</title>
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+  <style>
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1.75rem 3rem;
+    }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1000px 520px at 15% 0%, rgba(0,234,255,.18), transparent 60%),
+        linear-gradient(180deg, #0b1018 0%, #07101a 45%, #04101a 100%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #d7e2ea;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    .lore-back { align-self: flex-start; margin-bottom: 1.5rem; }
+    .lore-wrapper {
+      width: min(880px, 100%);
+      background: rgba(8, 13, 18, 0.78);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 14px;
+      padding: 2.5rem 2.5rem 2.75rem;
+      position: relative;
+      box-shadow:
+        0 25px 60px rgba(0, 217, 255, 0.08),
+        inset 0 0 22px rgba(0, 217, 255, 0.08);
+      overflow: hidden;
+    }
+    .lore-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -120px -140px auto auto;
+      height: 260px;
+      width: 260px;
+      background: radial-gradient(circle, rgba(0,234,255,.18) 0%, transparent 70%);
+      opacity: .8;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+    .lore-header { position: relative; z-index: 1; margin-bottom: 2.25rem; }
+    .lore-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .85rem;
+      letter-spacing: .22rem;
+      text-transform: uppercase;
+      color: rgba(0, 217, 255, .7);
+    }
+    .lore-eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: rgba(0, 217, 255, .6);
+    }
+    .lore-header h1 {
+      margin: .65rem 0 1rem;
+      font-family: "Rajdhani", "Inter", sans-serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      letter-spacing: .08rem;
+      color: #00e6ff;
+      text-shadow: 0 0 15px rgba(0, 217, 255, 0.45);
+    }
+    .lore-summary {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(215, 226, 234, .88);
+      max-width: 620px;
+    }
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 2px solid rgba(0, 217, 255, .2);
+      position: relative;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-left: 1px dashed rgba(0, 217, 255, .25);
+      transform: translateX(-2px);
+      pointer-events: none;
+    }
+    .timeline-item { position: relative; padding-left: 1.75rem; margin-bottom: 1.8rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-marker {
+      position: absolute;
+      left: -10px;
+      top: .35rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00d9ff;
+      box-shadow:
+        0 0 0 4px rgba(0, 217, 255, 0.18),
+        0 0 12px rgba(0, 217, 255, 0.65);
+    }
+    .timeline-title {
+      font-family: "Rajdhani", "Inter", sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: .04rem;
+      color: #ffb400;
+      margin: 0 0 .35rem;
+    }
+    .timeline-copy { margin: 0; color: rgba(215, 226, 234, .82); line-height: 1.7; }
+    .timeline-copy + .timeline-copy { margin-top: .75rem; }
+    @media (max-width: 680px) {
+      .page { padding: 2rem 1.2rem 2.5rem; }
+      .lore-wrapper { padding: 2.1rem 1.5rem 2.4rem; border-radius: 12px; }
+      .timeline { border-left: 1px solid rgba(0, 217, 255, .2); }
+      .timeline-item { padding-left: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="btn lore-back" href="../transfer.html#fragments/visuals.html">← Back</a>
+
+    <main class="lore-wrapper">
+      <header class="lore-header">
+        <span class="lore-eyebrow">Fiche Lore</span>
+        <h1>Jonas Mercer — « Greencoat »</h1>
+        <p class="lore-summary">
+          « Seule la parité de feu engendre une véritable justice, même si cela revient à pactiser avec le diable. »
+        </p>
+      </header>
+
+      <ul class="timeline">
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Origines</h2>
+          <p class="timeline-copy">
+            Sous un toit qui fuit, Jonas écoute la radio de sécurité d'<strong>Orbis</strong> avec son père réparateur.
+            Le haut-parleur promet « un quartier plus sûr » tandis qu'à deux rues, on entend encore des rafales.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Symbole(8 ans)</h2>
+          <p class="timeline-copy">
+            Distribution humanitaire d'une parka vert armée. Sa mère y coud des poches secrètes pour tickets, pilules et papiers.
+            Des années plus tard, la parka sera démontée puis reforgée en sa signature: la redingote « Greencoat ».
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Source de ces compétences(11 ans)</h2>
+          <p class="timeline-copy">
+            Avec son meilleur ami, il bricole des armes rudimentaires à partir de pièces récupérées dans l'atelier paternel.
+            Jonas, plus débrouillard, réussit à en écouler quelques-unes: leurs <em>premiers gains</em>.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Celle qu'il n'a pas sauvée(12 ans)</h2>
+          <p class="timeline-copy">
+            Une révolte d'ouvriers éclate contre des conditions inhumaines ; certains sortent des armes.
+            Au même moment, leur petit atelier est découvert par la sécurité d'Orbis. Son ami tente de se défendre
+            avec leurs fabrications. Face à un écart d'équipement absolu, la révolte échoue. Jonas survit,
+            mais perd son ami à jamais. Naît alors une obsession: mettre de meilleurs armes entre "nos" mains.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Vendre en connaissance de cause(22 ans)</h2>
+          <p class="timeline-copy">
+            Témoin involontaire d'une fusillade liée à un deal, il est frappé par la qualité de l'arsenal: les armes
+            portent l'empreinte de <strong>société B</strong>. Le contact local est mort, mais Jonas parvient à remonter
+            la filière et à se connecter à B — suffisamment pour devenir un petit maillon de sa distribution.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Présent</h2>
+          <p class="timeline-copy">
+            Aujourd'hui, il écoule des lots B sur le territoire d'Orbis. Il jure offrir la « parité de feu » aux faibles,
+            tout en sachant qu'il n'est qu'un pion sur l'échiquier des corporations.
+          </p>
+        </li>
+      </ul>
+    </main>
+  </div>
+</body>
+</html>

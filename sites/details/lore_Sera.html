@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Détail — Sera Ashford</title>
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+  <style>
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1.75rem 3rem;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1000px 520px at 15% 0%, rgba(0,234,255,.18), transparent 60%),
+        linear-gradient(180deg, #0b1018 0%, #07101a 45%, #04101a 100%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #d7e2ea;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    .lore-back { align-self: flex-start; margin-bottom: 1.5rem; }
+
+    .lore-wrapper {
+      width: min(880px, 100%);
+      background: rgba(8, 13, 18, 0.78);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 14px;
+      padding: 2.5rem 2.5rem 2.75rem;
+      position: relative;
+      box-shadow:
+        0 25px 60px rgba(0, 217, 255, 0.08),
+        inset 0 0 22px rgba(0, 217, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .lore-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -120px -140px auto auto;
+      height: 260px;
+      width: 260px;
+      background: radial-gradient(circle, rgba(0,234,255,.18) 0%, transparent 70%);
+      opacity: .8;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .lore-header { position: relative; z-index: 1; margin-bottom: 2.25rem; }
+
+    .lore-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .85rem;
+      letter-spacing: .22rem;
+      text-transform: uppercase;
+      color: rgba(0, 217, 255, .7);
+    }
+
+    .lore-eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: rgba(0, 217, 255, .6);
+    }
+
+    .lore-header h1 {
+      margin: .65rem 0 1rem;
+      font-family: "Rajdhani", "Inter", sans-serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      letter-spacing: .08rem;
+      color: #00e6ff;
+      text-shadow: 0 0 15px rgba(0, 217, 255, 0.45);
+    }
+
+    .lore-summary {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(215, 226, 234, .88);
+      max-width: 620px;
+    }
+
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 2px solid rgba(0, 217, 255, .2);
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-left: 1px dashed rgba(0, 217, 255, .25);
+      transform: translateX(-2px);
+      pointer-events: none;
+    }
+
+    .timeline-item { position: relative; padding-left: 1.75rem; margin-bottom: 1.8rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-marker {
+      position: absolute;
+      left: -10px;
+      top: .35rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00d9ff;
+      box-shadow:
+        0 0 0 4px rgba(0, 217, 255, 0.18),
+        0 0 12px rgba(0, 217, 255, 0.65);
+    }
+
+    .timeline-title {
+      font-family: "Rajdhani", "Inter", sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: .04rem;
+      color: #ffb400;
+      margin: 0 0 .35rem;
+    }
+
+    .timeline-copy { margin: 0; color: rgba(215, 226, 234, .82); line-height: 1.7; }
+    .timeline-copy + .timeline-copy { margin-top: .75rem; }
+
+    @media (max-width: 680px) {
+      .page { padding: 2rem 1.2rem 2.5rem; }
+      .lore-wrapper { padding: 2.1rem 1.5rem 2.4rem; border-radius: 12px; }
+      .timeline { border-left: 1px solid rgba(0, 217, 255, .2); }
+      .timeline-item { padding-left: 1.5rem; }
+    }
+  </style>
+  </head>
+<body>
+  <div class="page">
+    <a class="btn lore-back" href="../transfer.html#fragments/visuals.html">← Back</a>
+
+    <main class="lore-wrapper">
+      <header class="lore-header">
+        <span class="lore-eyebrow">Fiche Lore</span>
+        <h1>Sera Ashford</h1>
+        <p class="lore-summary">
+          « Ils pensaient avoir brûlé une maison; ce qu'ils ne brûleront jamais, c'est le goût de nos dîners que je garde en mémoire. »
+        </p>
+      </header>
+
+      <ul class="timeline">
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Origines</h2>
+          <p class="timeline-copy">
+            Née dans une famille de classe moyenne, Sera grandit avec des parents employés d'entreprise.
+            Son père, autrefois idéaliste, lui transmet parfois des idées de justice et de résistance face aux mégacorps,
+            sans jamais tomber dans l'excès. Ces paroles deviennent des repères silencieux.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">La nuit de cendres (17 ans)</h2>
+          <p class="timeline-copy">
+            Des hommes armés s'introduisent chez eux, assassinent ses parents et mettent le feu à la maison.
+            Les brûlures qui marquent son corps et le handicap de sa main gauche datent de cette nuit-là.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Recrutement</h2>
+          <p class="timeline-copy">
+            Orpheline et sans ressources, elle est repérée par un gang, séduit par l'éducation qu'elle a reçue.
+            Ils la recueillent, la forment, et lui offrent un moyen de survivre — en échange de loyautés implicites.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Révélation (21 ans)</h2>
+          <p class="timeline-copy">
+            Elle découvre que la mort de ses parents fut une conséquence des rivalités d'intérêts entre corporations et de prises de parti.
+            Sa rage contre les entreprises devient irrépressible, mais plus froide, plus calculée.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Événement déterminant (24 ans)</h2>
+          <p class="timeline-copy">
+            En gagnant la confiance du gang, Sera accède à son noyau dur et à des missions plus sombres.
+            Elle utilise ses accès pour collecter des preuves sur l'attaque de sa famille et organise une vengeance discrète:
+            un « accident » de voiture élimine l'un des exécutants principaux, déjà retiré mais jamais jugé.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Trahison</h2>
+          <p class="timeline-copy">
+            En poursuivant son enquête, elle découvre des liens étroits entre le gang qui l'a élevée et la mégacorporation (Orbis):
+            contrats sales, sous-traitance d'opérations inavouables. Pire: certains des hommes de main d'autrefois occupent
+            aujourd'hui des places clés dans l'organisation. Sera hésite: ces gens obéissaient peut-être, eux aussi, à la terreur
+            d'un système plus grand qu'eux. Cette hésitation lui coûte cher: ses agissements sont démasqués. Pour sa propre survie,
+            le gang décide de « couper court ». Sera est contrainte à la fuite.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Présent</h2>
+          <p class="timeline-copy">
+            Elle vit désormais sous la protection d'une taverne.
+            Elle s'y reconstruit lentement, jonglant entre faux noms et petits boulots, tout en traçant sa prochaine étape.
+          </p>
+        </li>
+      </ul>
+    </main>
+  </div>
+</body>
+</html>

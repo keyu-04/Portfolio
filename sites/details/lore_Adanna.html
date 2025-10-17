@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Détail — Adanna Kalu</title>
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+  <style>
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1.75rem 3rem;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1000px 520px at 15% 0%, rgba(0,234,255,.18), transparent 60%),
+        linear-gradient(180deg, #0b1018 0%, #07101a 45%, #04101a 100%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #d7e2ea;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    .lore-back { align-self: flex-start; margin-bottom: 1.5rem; }
+
+    .lore-wrapper {
+      width: min(880px, 100%);
+      background: rgba(8, 13, 18, 0.78);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 14px;
+      padding: 2.5rem 2.5rem 2.75rem;
+      position: relative;
+      box-shadow:
+        0 25px 60px rgba(0, 217, 255, 0.08),
+        inset 0 0 22px rgba(0, 217, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .lore-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -120px -140px auto auto;
+      height: 260px;
+      width: 260px;
+      background: radial-gradient(circle, rgba(0,234,255,.18) 0%, transparent 70%);
+      opacity: .8;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .lore-header { position: relative; z-index: 1; margin-bottom: 2.25rem; }
+
+    .lore-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .85rem;
+      letter-spacing: .22rem;
+      text-transform: uppercase;
+      color: rgba(0, 217, 255, .7);
+    }
+
+    .lore-eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: rgba(0, 217, 255, .6);
+    }
+
+    .lore-header h1 {
+      margin: .65rem 0 1rem;
+      font-family: "Rajdhani", "Inter", sans-serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      letter-spacing: .08rem;
+      color: #00e6ff;
+      text-shadow: 0 0 15px rgba(0, 217, 255, 0.45);
+    }
+
+    .lore-summary {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(215, 226, 234, .88);
+      max-width: 640px;
+    }
+
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 2px solid rgba(0, 217, 255, .2);
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-left: 1px dashed rgba(0, 217, 255, .25);
+      transform: translateX(-2px);
+      pointer-events: none;
+    }
+
+    .timeline-item { position: relative; padding-left: 1.75rem; margin-bottom: 1.8rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-marker {
+      position: absolute;
+      left: -10px;
+      top: .35rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00d9ff;
+      box-shadow:
+        0 0 0 4px rgba(0, 217, 255, 0.18),
+        0 0 12px rgba(0, 217, 255, 0.65);
+    }
+
+    .timeline-title {
+      font-family: "Rajdhani", "Inter", sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: .04rem;
+      color: #ffb400;
+      margin: 0 0 .35rem;
+    }
+
+    .timeline-copy { margin: 0; color: rgba(215, 226, 234, .82); line-height: 1.7; }
+    .timeline-copy + .timeline-copy { margin-top: .75rem; }
+
+    @media (max-width: 680px) {
+      .page { padding: 2rem 1.2rem 2.5rem; }
+      .lore-wrapper { padding: 2.1rem 1.5rem 2.4rem; border-radius: 12px; }
+      .timeline { border-left: 1px solid rgba(0, 217, 255, .2); }
+      .timeline-item { padding-left: 1.5rem; }
+    }
+  </style>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />Back
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Détail — Adanna Kalu</title>
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+</head>
+<body>
+  <div class="page">
+    <a class="btn lore-back" href="../transfer.html#fragments/visuals.html">← Back</a>
+
+    <main class="lore-wrapper">
+      <header class="lore-header">
+        <span class="lore-eyebrow">Fiche Lore</span>
+        <h1>Adanna Kalu</h1>
+        <p class="lore-summary">
+          « J'ai été à un pas du bonheur... »
+        </p>
+      </header>
+
+      <ul class="timeline">
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Origines</h2>
+          <p class="timeline-copy">
+            Le père d'Adanna travaillait autrefois comme tueur à gages pour une grande entreprise, chargé d'éliminer ses menaces dans l'ombre.  
+            Il savait que ce genre de travail ne pouvait durer, mais à une époque où un tel revenu était rare, il lui était difficile de s'en détacher.  
+            Les deux parties détenaient des secrets compromettants l'une sur l'autre, il n'avait plus vraiment le choix.  
+            En un sens, lui aussi était une victime du système.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Source de ces compétences</h2>
+          <p class="timeline-copy">
+            Son père refusait qu'elle suive le même chemin, mais, conscient des dangers de son monde, il lui enseigna très tôt à se défendre, à lire les menaces et à survivre.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Secret</h2>
+          <p class="timeline-copy">
+            Elle avait entendu parler de plusieurs opérations majeures auxquelles son père avait pris part, notamment le nettoyage d'unités clés liées à l'ancien conseil d'administration de la société.
+            Leurs actions se terminaient souvent dans les flammes: un assassinat précis, puis un incendie soigneusement orchestré pour effacer toute trace.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Retraite(16 ans)</h2>
+          <p class="timeline-copy">
+            Après avoir rempli certaines conditions, son père parvint à quitter l'entreprise sans laisser de traces.  
+            La famille s'éloigna du centre-ville et connut enfin quelques années de calme et de sérénité — un luxe rare dans ce monde.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Perte(17 ams)</h2>
+          <p class="timeline-copy">
+            Un jour, il mourut dans un « accident de la route ».  
+            Les rapports étaient clairs, trop clairs.  
+            Pour Adanna, ce n'était pas un hasard.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Réveil(18 ans)</h2>
+          <p class="timeline-copy">
+            Devenue adulte, Adanna retrouve ces souvenirs cachés.  
+            Elle en était convaincue: la mort de son père était le prix d'un contrat rompu, une vengeance orchestrée par ceux qu'il avait voulu fuir.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Plongée dans l'ombre</h2>
+          <p class="timeline-copy">
+            Portée par le désir de vengeance et armée des compétences que son père lui avait transmises,  
+            elle s'enfonça dans les marges du monde, devenant elle aussi tueuse à gages.  
+            Ses enquêtes la menèrent pourtant à d'autres vérités: l'accident n'avait pas été commandité par l'entreprise.  
+            Quelqu'un d'autre tirait les ficelles.
+          </p>
+        </li>
+
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <h2 class="timeline-title">Présent</h2>
+          <p class="timeline-copy">
+            Aujourd'hui encore, Adanna enquete sur le véritable meurtrier...
+          </p>
+        </li>
+      </ul>
+    </main>
+  </div>
+</body>
+</html>

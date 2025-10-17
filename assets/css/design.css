@@ -74,7 +74,7 @@
     transition: box-shadow 0.25s ease, transform .12s ease;
     position: relative;
 }
-.gdd-card:hover { box-shadow: 0 0 30px rgba(0, 217, 255, 0.22); transform: translateY(-2px); }
+
 
 /* decorative corners */
 .gdd-card::before,

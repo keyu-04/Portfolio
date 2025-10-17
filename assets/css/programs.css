@@ -47,7 +47,6 @@
   transition: box-shadow .25s ease, transform .12s ease;
   position: relative;
 }
-.prog-card:hover { box-shadow: 0 0 30px rgba(0, 217, 255, 0.22); transform: translateY(-2px); }
 
 /* decorative corners */
 .prog-card::before,
@@ -125,6 +124,10 @@
   aspect-ratio: 16/9;
   object-fit: contain;
 }
+
+/* Button for details */
+.btn.btn-details { --btn-color: var(--fg); }
+
 
 /* removed .demo-actions, .demo-placeholder, .demo-frame, .demo-note per request */
 
