@@ -27,7 +27,7 @@
           <span class="filename">snake.py</span>
           <span class="flex-spacer"></span>
           <span class="flex-spacer"></span>
-          <a class="btn btn-details" href="details/code_Snake.html">Voir détail</a>
+          <a class="btn btn-details" href="details/code_Snake.html">Détail</a>
         </div>
         <div class="code-scroll">
           <pre class="code-block" aria-label="main.py"><code>
@@ -152,7 +152,7 @@ pyxel.run(update, draw)
           <span class="filename">morpion.py</span>
             <span class="flex-spacer"></span>
           <span class="flex-spacer"></span>
-          <a class="btn btn-details" href="details/code_Morpion.html">Voir détail</a>
+          <a class="btn btn-details" href="details/code_Morpion.html">Détail</a>
         </div>
         <div class="code-scroll">
           <pre class="code-block" aria-label="game.py"><code>
@@ -292,7 +292,7 @@ while fin == False:
           <span class="filename">NDC.py</span>
           <span class="flex-spacer"></span>
           <span class="flex-spacer"></span>
-          <a class="btn btn-details" href="details/code_NDC.html">Voir détail</a>
+          <a class="btn btn-details" href="details/code_NDC.html">Détail</a>
         </div>
         <div class="code-scroll">
           <pre class="code-block" aria-label="game.py"><code>
@@ -633,6 +633,105 @@ pyxel.run(update, draw)
             Le chevalier perd une coeur lorsqu'il touche un squelette ou une flech, il gagne une coeur quand il touche une coeur sur le map.
             Le joueur peut attaquer avec le bouton "espace", Le chevalier avancera d'une courte distance et éliminera tous les ennemis touchés sans perdre de coeur.
             Le joueur gagne 5 point lorsqu'il élimine un Guerrier squelette, 10 point lorsqu'il élimine un Archers squelettes.</p>
+      </div>
+    </div>
+  </section>
+
+
+<section class="prog-card" id="game-4">
+    <header class="prog-card-header">
+      <h2>test Godot</h2>
+      <p class="small">Réalisation des animations basique d'un personnage 2D</p>
+    </header>
+
+    <div class="prog-grid">
+      <div class="prog-code" data-filename="game.py">
+        <div class="code-toolbar">
+          <span class="filename">player.gdscipt</span>
+          <span class="flex-spacer"></span>
+          <span class="flex-spacer"></span>
+          <a class="btn btn-details" href="details/code_godot.html">Détail</a>
+        </div>
+        <div class="code-scroll">
+          <pre class="code-block" aria-label="game.py"><code>
+extends CharacterBody2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+@onready var ap = $Sprit2D/AnimationPlayer
+@onready var sprit = $Sprit2D
+var isJumping = false
+
+var is_jumping := false
+var is_animating := false  
+var can_attack := true     
+
+const ATTACK_COOLDOWN = 0.5  
+
+	
+
+
+func _physics_process(delta: float) -> void:
+	if is_animating == true:  
+		return
+		
+	if is_on_floor():
+		if (velocity.x > 1 || velocity.x < -1 ):
+			ap.play("Run")
+		else:
+			ap.play("idle")
+	else:
+		velocity += get_gravity() * delta
+		if velocity.y > 150:
+			ap.play("fall")
+		
+		
+		
+	
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		ap.play("jump")
+		is_animating = true
+		await get_tree().create_timer(0.24).timeout
+		is_animating = false
+		velocity.y = JUMP_VELOCITY
+		
+	
+	
+	var direction := Input.get_axis("ui_left", "ui_right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, 20)
+		
+	
+	if Input.is_action_just_pressed("attack"):
+		is_animating = true
+		can_attack = false
+		ap.play("attack")
+
+		await ap.animation_finished
+
+		is_animating = false
+		await get_tree().create_timer(ATTACK_COOLDOWN).timeout
+		can_attack = true
+		
+	move_and_slide()
+
+
+	if direction != 0:
+		sprit.flip_h = (direction == -1)
+
+
+</code></pre>
+        </div>
+      </div>
+
+      <div class="prog-demo">
+        <video class="demo-media" autoplay muted loop playsinline>
+          <source src="../assets/demo/godot.mp4" type="video/mp4" /></video>
+        <p class="small demo-note">Réalisation des animations basique d'un personnage 2D avec Godot et gdscript. Avec gravité, deplacements(droit,gauche), sauter
+            , tomber,attaquer.</p>
       </div>
     </div>
   </section>

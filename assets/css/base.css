@@ -70,6 +70,8 @@ body {
 .btn2,
 .btn--red,
 .btn.btn-details {
+  align-self: start;
+  text-align: center;
   --btn-color: var(--fg);
 }
 
