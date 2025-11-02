@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Character Sheet - CV</title>
+
+  <link rel="stylesheet" href="../assets/css/base.css" />
+
+  <link rel="stylesheet" href="../assets/css/design.css" />
+  <style>
+
+    html,body{height:100%}
+    body{margin:0}
+    .page{min-height:100%; display:grid; place-items:center; padding:40px 16px; 
+      padding: 60px 16px 40px;}
+    .sheet{width:min(1100px,100%); display:grid; gap:18px; grid-template-columns:320px 1fr;align-items: start;}
+
+
+    .hero.hero--clean {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  margin-bottom: clamp(24px, 5vh, 48px);
+}
+
+.hero.hero--clean h1 {
+  margin: 0;
+  text-align: center;
+  gap:12px;
+      padding:14px 16px;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.15));
+      box-shadow:
+        0 0 0 2px color-mix(in oklab, var(--fg) 15%, transparent),
+        0 0 24px 2px color-mix(in oklab, var(--fg) 35%, transparent);}
+
+
+.hero-buttons {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px;
+  backdrop-filter: blur(6px);
+}
+
+.hero-buttons .btn {
+  width: max-content;
+}
+
+    .sticky-dl{
+    position:fixed; right:24px; bottom:24px; z-index:1000;
+    box-shadow:0 8px 24px rgba(255,0,0,.25);}
+    .btn--red{ transition:transform .12s ease }
+    .btn--red:hover{ transform:translateY(-1px) }
+
+    .pane{
+      background:rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:16px;
+      backdrop-filter:blur(6px);
+    }
+    .profile{display:grid; gap:16px;}
+    .avatar{
+      aspect-ratio:1/1; border-radius:14px;
+      border:1px solid color-mix(in oklab, var(--accent) 25%, transparent);
+      background: radial-gradient(120% 120% at 50% 0%, rgba(0,217,255,.12), transparent 60%);
+      display:grid; place-items:center;
+    }
+    .avatar .portrait{
+      width:70%; height:70%;
+      border:1px dashed var(--accent); border-radius:10px;
+      display:grid; place-items:center; color:var(--accent);
+      font-size:12px; letter-spacing:.08em; text-align:center;
+    }
+    .contact{display:grid; gap:8px; font-size:14px;}
+    .contact a{ color:var(--accent); text-decoration:none }
+    .kv{ display:grid; grid-template-columns: 96px 1fr; gap:6px 10px; }
+    .kv b{ color:var(--fg2); font-weight:600; }
+
+    .attributes{ display:grid; gap:10px; }
+    .attr{ display:grid; gap:6px; }
+    .attr b{ letter-spacing:.12em; font-size:13px; color:var(--fg); text-transform:uppercase; }
+    .bar{
+      height:10px; border-radius:10px;
+      border:1px solid color-mix(in oklab, var(--fg) 25%, transparent);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.25));
+      position:relative; overflow:hidden;
+    }
+    .bar > i{
+      position:absolute; inset:0; width:var(--val,50%);
+      background:linear-gradient(90deg, var(--fg) 0%, color-mix(in oklab, var(--fg) 35%, var(--accent)) 100%);
+      box-shadow: 0 0 10px 0 color-mix(in oklab, var(--fg) 60%, transparent), inset 0 0 12px rgba(0,0,0,.35);
+    }
+
+    .tags{ display:flex; flex-wrap:wrap; gap:8px; }
+    .tag{
+      border:1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+      border-radius:999px; padding:6px 10px; font-size:12px; letter-spacing:.08em; color:var(--accent);
+      background: linear-gradient(180deg, rgba(0,217,255,.12), rgba(0,0,0,.35));
+    }
+
+    .right{ display:grid; gap:16px;  align-items: start; min-width: 0;}
+
+
+    .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .list{ display:grid; gap:10px; }
+
+    .timeline{ position:relative; display:grid; gap:12px; }
+    .timeline::before{
+      content:""; position:absolute; left:10px; top:0; bottom:0; width:2px;
+      background: linear-gradient(180deg, var(--fg), transparent); opacity:.35;
+    }
+    .dot{ position:relative; padding-left:28px; }
+    .dot::before{
+      content:""; position:absolute; left:4px; top:.45em; width:12px; height:12px;
+      border-radius:50%; border:2px solid var(--fg);
+      background:radial-gradient(circle at 50% 50%, var(--fg) 0 40%, transparent 42%);
+      box-shadow: 0 0 10px color-mix(in oklab, var(--fg) 60%, transparent);
+    }
+
+    table{ width:100%; border-collapse:separate; border-spacing:0 8px; font-size:14px; }
+    th{ text-align:left; font-weight:600; color:var(--fg2); letter-spacing:.06em; }
+    td,th{ padding:8px 10px; }
+
+    .footer{ grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center; margin-top:6px; }
+    .small{ color:var(--muted); font-size:14px }
+
+    @media (max-width:900px){
+      .sheet{grid-template-columns:1fr}
+      .profile {order: 1;}
+      .right {order: 2;}
+      .grid2{grid-template-columns:1fr}
+      .hero{grid-template-columns:auto 1fr auto}
+      .hero-center{justify-self:start}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <header class="hero hero--clean">
+  <div class="hero-buttons">
+    <a class="btn btn--red" href="#">Télécharger le CV (PDF)</a>
+    <a class="btn" href="home.html">Retour</a>
+  </div>
+  <h1>Character Sheet</h1>
+</header>
+
+
+    <section class="sheet">
+
+      <aside class="profile pane">
+        <div class="avatar">
+          <div class="portrait">PLACEHOLDER<br/>portrait</div>
+        </div>
+
+        <div class="contact">
+          <h2>Profil</h2>
+          <div class="kv">
+            <b>Nom</b><span>Keyu YE</span>
+            <b>Rôle</b><span>Future Game Designer/ Freelance Artist</span>
+            <b>Mail</b><span><a href="mailto:keyu416@gmail.com">keyu416@gmail.com</a></span>
+            <b>Site</b><span><a href="https://keyu-04.github.io/Portfolio/">keyu-04.github.io/ Portfolio/</a></span>
+            <b>GitHub</b><span><a href="https://github.com/keyu-04">github.com/keyu-04</a></span>
+            <b>Localisation</b><span>France</span>
+          </div>
+        </div>
+
+        <div class="attributes">
+          <h2>Attributs</h2>
+          <div class="attr"><b>Technique</b><div class="bar"><i style="--val:40%"></i></div></div>
+          <div class="attr"><b>Créativité</b><div class="bar"><i style="--val:78%"></i></div></div>
+          <div class="attr"><b>Analyse</b><div class="bar"><i style="--val:92%"></i></div></div>
+          <div class="attr"><b>Communication</b><div class="bar"><i style="--val:50%"></i></div></div>
+          <div class="attr"><b>Persévérance</b><div class="bar"><i style="--val:55%"></i></div></div>
+        </div>
+
+        <div>
+          <h2>Compétences clés</h2>
+          <div class="tags">
+            <span class="tag">Dessin numérique</span>
+            <span class="tag">Character/ design</span>
+            <span class="tag">Modeling</span>
+            <span class="tag">Python</span>
+            <span class="tag">Enemy AI Design</span>
+            <span class="tag">System Design</span>
+            <span class="tag">Web Design</span>
+          </div>
+        </div>
+
+        <div>
+          <h2>Langues</h2>
+          <div class="tags">
+            <span class="tag">Français</span>
+            <span class="tag">English</span>
+            <span class="tag">Chinois</span>
+          </div>
+        </div>
+      </aside>
+
+
+      <section class="right">
+
+        <div class="grid2">
+          <div class="gdd-card">
+            <h3>Résumé</h3>
+            <p>Étudiant passionné par l'univers du jeu vidéo, avec un intérêt particulier pour le gameplay systémique et les expériences immersives,
+              et le character design & l'illustration en complémentaire.
+            </p>
+          </div>
+          <div class="gdd-card">
+            <h3>Approches de conception</h3>
+            <p>Je conçois le jeu comme un système cohérent où chaque mécanique sert une intention précise. 
+              Mon approche repose sur 'observation, l'itération rapide et l'analyse du ressenti joueur. 
+              J'aime relier la logique du code, le rythme du gameplay et la cohérence du monde.</p>
+          </div>
+        </div>
+
+        <div class="gdd-card">
+          <h3>Expérience</h3>
+          <div class="timeline">
+            <div class="dot">
+              <div class="meta">2025 — Game Jam lycéenne</div>
+              <p><b>Participation à la Nuit du Code</b>: création d'un mini-jeu en équipe sous contrainte de temps(6 heurs), initiation au travail collaboratif et à la conception rapide de prototypes.</p>
+            </div>
+            <div class="dot">
+              <div class="meta">2024 — Stage</div>
+              <p><b>Stage d'observation chez Ubisoft Bordeaux</b>: familiarisation avec le fonctionnement de l'industrie du jeu vidéo et les processus de production d'un jeu AAA. </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="gdd-card">
+            <h3>Éducation</h3>
+            <table>
+              <thead>
+                <tr><th>Année</th><th>Programme</th><th>Établissement</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>2025</td><td>Game Design & Programming (candidat)</td><td>ISART Digital</td></tr>
+                <tr><td>2025-2026</td><td>NSI/AMC</td><td>Lycée Notredame de Valenciennes</td></tr>
+                <tr><td>2024-2025</td><td>Maths/NSI/AMC</td><td>Lycée Notredame de Valenciennes</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="gdd-card">
+            <h3>Outils</h3>
+            <div class="tags">
+              <span class="tag">Procreate</span>
+              <span class="tag">Photoshop</span>
+              <span class="tag">Blender</span>
+              <span class="tag">Substance 3D Painter</span>
+              <span class="tag">Unreal Engine</span>
+              <span class="tag">Godot</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gdd-card">
+          <h3>Perks</h3>
+          <div class="list">
+            <div>• <b>Design Systémique</b> — relier mécaniques & feedbacks pour une boucle claire.</div>
+            <div>• <b>Analyse & Logique</b> — capacité à décomposer les systèmes et à résoudre les problèmes de manière rationnelle.</div>
+            <div>• <b>Sens artistique</b> — goût pour la composition visuelle, la couleur et l’atmosphère.</div>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+
