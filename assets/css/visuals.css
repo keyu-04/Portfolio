@@ -1,6 +1,4 @@
-/* Visuals page styles */
 
-/* ========== Cyberpunk polish for Visuals ========== */
 .vis-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -37,7 +35,7 @@
   margin: 1rem 0 0;
 }
 
-/* Card */
+
 .vis-card {
   background: linear-gradient(180deg, rgba(11,15,20,.85), rgba(11,15,20,.72));
   border: 1px solid rgba(0,217,255,.35);
@@ -49,7 +47,7 @@
   position: relative;
 }
 
-/* decorative corners */
+
 .vis-card::before,
 .vis-card::after { content:""; position:absolute; width:26px; height:26px; border:1px solid var(--accent); opacity:.7; }
 .vis-card::before { left:-1px; top:-1px; border-right:0; border-bottom:0; border-top-left-radius:6px; }
@@ -62,7 +60,7 @@
   letter-spacing: 1px;
 }
 
-/* Layout */
+
 .vis-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr; /* gallery | side */
@@ -71,19 +69,20 @@
   margin-top: 1rem;
 }
 
-/* Gallery as a vertical list of items */
+
 .vis-gallery {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
-/* One row: image left, note right */
 .art-item {
   display: grid;
-  grid-template-columns: minmax(180px, 280px) 1fr;
-  gap: .9rem;
-  align-items: stretch;
+  gap: 0.8rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(0, 217, 255, 0.35);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.22);
 }
 
 .art {
@@ -99,7 +98,7 @@
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
-/* Portrait variant for vertical images */
+
 .art-portrait { aspect-ratio: 3 / 4; }
 
 .art img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -133,15 +132,9 @@
 }
 .art-square { aspect-ratio: 1 / 1; }
 
-/* Placeholder styling for dev */
-.art-ph {
-  display: flex; align-items: center; justify-content: center;
-  color: var(--muted); font-style: italic; letter-spacing: .5px;
-  background: rgba(207, 0, 0, 0.08);
-  border: 1px dashed var(--fg);
-}
 
-/* Sidebar */
+
+
 .vis-side {
   border: 1px solid rgba(0, 217, 255, 0.35);
   border-radius: 6px;
@@ -152,38 +145,36 @@
 .vis-side h3 { color: var(--accent); margin: 0 0 .5rem 0; letter-spacing: .5px; }
 .vis-desc { color: var(--muted); line-height: 1.6; margin: 0 0 .75rem 0; }
 
-/* Section-specific: Autre Arts uses full-width gallery under the intro */
-#project-b .vis-grid { grid-template-columns: 1fr; }
-#project-b .vis-side { order: 1; margin-bottom: .5rem; }
-#project-b .vis-gallery { order: 2; }
 
-.vis-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  align-self: stretch;
-}
-.art-item-feature {
-  padding: 0.85rem;
-  border: 1px solid rgba(0, 217, 255, 0.35);
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.22);
+#project-b .vis-grid {
   grid-template-columns: 1fr;
-  gap: 0.8rem;
+  gap: 1.25rem;
 }
-.art-item-feature .art {
-  border: 1px solid rgba(0, 217, 255, 0.45);
-  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.12);
+
+#project-b .vis-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  order: 2;
 }
-.art-item-feature .art-note {
-  background: rgba(0, 0, 0, 0.3);
+
+
+#project-b .art-item {
+  grid-template-columns: 1fr;
 }
-.art-item-feature .vis-meta {
-  margin: 0 0 0.5rem 0;
+
+
+
+@media (max-width: 860px) {
+  #project-b .vis-gallery { grid-template-columns: 1fr; }
 }
-.art-item-feature .btn {
-  margin-top: auto;
-  align-self: flex-start;
+
+#project-a .vis-grid {
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (max-width: 860px) {
+  #project-a .vis-gallery { grid-template-columns: 1fr; }
 }
 
 .vis-meta { list-style: none; margin: 0 0 1rem 0; padding: 0; }
@@ -191,43 +182,5 @@
 .vis-meta li span { min-width: 64px; color: var(--fg); font-weight: 600; letter-spacing: .25px; }
 .vis-meta li em { font-style: normal; color: var(--muted); }
 
-.vis-actions { display: flex; gap: .5rem; }
 
-/* Button for details */
-.btn.btn-details { --btn-color: var(--fg); }
 
-/* Footer note */
-.vis-footer { margin: 1rem 0 0 0; color: var(--muted); }
-
-/* Responsive */
-@media (max-width: 980px) {
-  .vis-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 760px) {
-  .vis-container { padding: 1rem; }
-  .vis-header h1 { font-size: 1.8rem; }
-  .vis-card { padding: 1rem; }
-  .art-item { grid-template-columns: 1fr; }
-}
-/* Web fonts for CP2077-like typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@500;600;700&display=swap');
-
-/* Page-scoped theme variables + typography */
-body.theme-cp {
-  --bg:#0b0f14;
-  --fg:#d7e2ea;
-  --fg2:#ffb400;
-  --accent:#00eaff;
-  --muted:#7aa1c0;
-
-  background:
-    radial-gradient(1000px 520px at 20% 0%, rgba(0,234,255,.12), transparent 60%),
-    linear-gradient(180deg, #0c121a 0%, #0a0e16 60%, #07090f 100%);
-  color: var(--fg);
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  font-variant-numeric: tabular-nums;
-}
-body.theme-cp h1, body.theme-cp h2, body.theme-cp h3, body.theme-cp h4 { font-family: Rajdhani, Inter, Arial, sans-serif; font-weight: 700; }
