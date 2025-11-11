@@ -9,4 +9,4 @@ h2{letter-spacing:1px}
   box-shadow:0 0 20px rgba(0,217,255,.45);
   transition:width .12s ease;
 }
-body{pointer-events:none} /* 禁止操作 */
+body{pointer-events:none}

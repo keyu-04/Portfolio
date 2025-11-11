@@ -1,13 +1,11 @@
-/* ============ 变量（沿用你 base.css 的配色） ============ */
+
 :root{
-  /* 红色主高亮（你当前 --fg 是红色）与青色辅助（--accent） */
   --ui-red:    var(--fg);
   --ui-cyan:   var(--accent);
-  --ui-pane:   rgba(0,0,0,0.35);   /* 面板透明度 */
+  --ui-pane:   rgba(0,0,0,0.35);   
   --ui-border: rgba(255,255,255,0.07);
 }
 
-/* ============ 容器与布局微调（保持你原布局不变） ============ */
 .sidebar{
   background: var(--ui-pane);
   backdrop-filter: blur(6px);
@@ -19,10 +17,8 @@
 
 
 
-/* 取消旧的虚线 outline（如果 base.css 里有） */
 .nav{ outline: none !important; }
 
-/* ============ 导航项：基础状态更“沉”，hover 稍抬起 ============ */
 .nav{
   position:relative; 
   padding:8px;
@@ -38,7 +34,7 @@
   margin: 0;
   padding: 14px 16px 14px 18px;
   border-radius: 14px;
-  color: var(--fg);                     /* 仍使用你的前景色 */
+  color: var(--fg);                     
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.10));
   border: 1px solid color-mix(in oklab, var(--fg) 18%, transparent);
   transition: transform .15s ease, box-shadow .15s ease, border-color .2s, background .2s;
@@ -50,7 +46,6 @@
   background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.12));
 }
 
-/* 键盘聚焦到某一项时的可见性（不再用整块的青色虚线框） */
 .nav-item:focus-visible{
   outline: none;
   box-shadow:
@@ -59,7 +54,6 @@
   border-color: color-mix(in oklab, var(--ui-cyan) 40%, var(--fg) 10%);
 }
 
-/* ============ 选中高亮（重做 slider：内发光卡槽） ============ */
 .slider{
   position: absolute;
   top: 0;
@@ -81,19 +75,16 @@
   transition: transform .22s cubic-bezier(.2,.8,.2,1), width .22s, height .22s;
 }
 
-/* 默认不显示光标，选中后才出现 */
 .slider { opacity: 0; }
 .slider.is-on { opacity: 1; }
 
 
 
-/* 被选中项本身稍微提亮边线，避免只有“槽”在发光 */
 .nav-item.is-active{
   border-color: color-mix(in oklab, var(--ui-red) 55%, transparent);
   background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.10));
 }
 
-/* ============ 内容区轻微提亮（与导航分层） ============ */
 .content{
   background: rgba(0,0,0,0.35);
   border: 1px solid var(--ui-border);
@@ -106,7 +97,7 @@
 .content.fade-in{ animation: fade .28s ease }
 @keyframes fade{ from{opacity:.45; transform: translateY(6px)} to{opacity:1; transform:none} }
 
-/* ============ “Back” 按钮（更克制的青色） ============ */
+
 .btn-back{
   display: inline-flex;
   align-items: center;
@@ -135,16 +126,15 @@
 }
 
 
-/* 恢复双栏布局：左侧 260px 侧边栏 + 右侧自适应内容 */
+
 .app{
   display: grid;
-  grid-template-columns: 260px 1fr;  /* ← 关键：两列 */
+  grid-template-columns: 260px 1fr;  
   gap: 24px;
   min-height: 100dvh;
   padding: 24px;
 }
 
-/* 让侧边栏在滚动时固定在视口内的上缘，回到“贴左竖排”的感觉 */
 .sidebar{
   position: sticky;
   top: 24px;

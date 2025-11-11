@@ -2,7 +2,7 @@ h1{font-size:32px}
 
 .boards {
   display: flex;
-  gap: 100px;           /* 板块间隔 */
+  gap: 100px;          
   margin-top: 40px;
 }
 
@@ -11,7 +11,7 @@ h1{font-size:32px}
   min-width: 200px;
   height: 400px;
   padding: 40px 20px;
-  border: 2px solid #ff0033;              /* 红色描边 */
+  border: 2px solid #ff0033;              
   color: var(--fg);
   text-align: center;
   text-decoration: none;
@@ -20,7 +20,7 @@ h1{font-size:32px}
   letter-spacing: 1.5px;
   background: transparent;
   transition: all 0.2s ease;
-  box-shadow: 0 0 10px rgba(255,0,50,0.4); /* 微弱红色发光 */
+  box-shadow: 0 0 10px rgba(255,0,50,0.4); 
   position: relative;
 }
 
@@ -38,7 +38,7 @@ h1{font-size:32px}
   --ink:#0b0f14;
 }
 
-/* 可选：给容器加一点透视，悬停时更像HUD */
+
 .boards{ perspective: 900px; }
 
 .board{
@@ -53,33 +53,32 @@ h1{font-size:32px}
   font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  background: rgba(12,0,0,0.25);                 /* 轻微暗红透明底 */
+  background: rgba(12,0,0,0.25);                
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, filter .25s ease;
   box-shadow: 0 0 10px rgba(255,0,50,.35);
   position: relative;
-  /* 赛博斜切角 */
+
   clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px),
                      calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
-  isolation:isolate; /* 让子层发光不过界 */
+  isolation:isolate; 
 }
 
-/* 角标 + HUD 线条 */
+
 .board::before{
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
-  /* 8个背景绘制四个“L”型角标 */
   background:
-    /* top-left */
+    
     linear-gradient(0deg, var(--neon), var(--neon)) top left/28% 2px no-repeat,
     linear-gradient(90deg, var(--neon), var(--neon)) top left/2px 28% no-repeat,
-    /* top-right */
+    
     linear-gradient(0deg, var(--neon), var(--neon)) top right/28% 2px no-repeat,
     linear-gradient(90deg, var(--neon), var(--neon)) top right/2px 28% no-repeat,
-    /* bottom-left */
+    
     linear-gradient(0deg, var(--neon), var(--neon)) bottom left/28% 2px no-repeat,
     linear-gradient(90deg, var(--neon), var(--neon)) bottom left/2px 28% no-repeat,
-    /* bottom-right */
+    
     linear-gradient(0deg, var(--neon), var(--neon)) bottom right/28% 2px no-repeat,
     linear-gradient(90deg, var(--neon), var(--neon)) bottom right/2px 28% no-repeat;
   filter: drop-shadow(0 0 6px rgba(255,0,50,.6));
@@ -87,7 +86,7 @@ h1{font-size:32px}
   transition:opacity .25s ease;
 }
 
-/* 扫描线（悬停时出现并向下扫过） */
+
 .board::after{
   content:"";
   position:absolute; left:0; right:0; top:-30%;
@@ -106,13 +105,13 @@ h1{font-size:32px}
   100% { transform: translateY(420px); opacity:0; }
 }
 
-/* 轻微脉冲光 */
+
 @keyframes neon-breathe {
   from { box-shadow: 0 0 12px rgba(255,0,50,.35), inset 0 0 0 rgba(255,0,50,0); }
   to   { box-shadow: 0 0 24px rgba(255,0,50,.85), inset 0 0 12px rgba(255,0,50,.25); }
 }
 
-/* 悬停状态：上浮、微倾、提亮、开始呼吸光与扫描线 */
+
 .board:hover{
   border-color: var(--neon-hot);
   transform: translateY(-6px) rotateX(6deg) scale(1.02);
@@ -123,7 +122,7 @@ h1{font-size:32px}
   animation: sweep 1.2s ease-out forwards;
 }
 
-/* 标题小故障（glitch）特效：给放标题的元素加 .title 即可 */
+
 .board .title{
   letter-spacing: .18em;
   text-shadow: 0 0 6px rgba(255,0,50,.8);

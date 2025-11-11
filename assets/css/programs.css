@@ -1,6 +1,4 @@
-/* Programs page styles */
 
-/* ========== Cyberpunk polish for Programs ========== */
 .prog-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -48,7 +46,7 @@
   position: relative;
 }
 
-/* decorative corners */
+
 .prog-card::before,
 .prog-card::after { content:""; position:absolute; width:26px; height:26px; border:1px solid var(--accent); opacity:.7; }
 .prog-card::before { left:-1px; top:-1px; border-right:0; border-bottom:0; border-top-left-radius:6px; }
@@ -63,13 +61,13 @@
 
 .prog-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr; /* code | demo */
+  grid-template-columns: 1.3fr 1fr;
   gap: 1.25rem;
   align-items: start;
   margin-top: 1rem;
 }
 
-/* Code panel */
+
 .prog-code {
   border: 1px solid rgba(0, 217, 255, 0.35);
   border-radius: 6px;
@@ -107,11 +105,10 @@
 .prog-code.is-collapsed .code-scroll { max-height: 0; border: 0; padding: 0; }
 .prog-code.is-collapsed .code-block { padding: 0; }
 
-/* Demo panel */
-/* small helper note under videos */
+
 .demo-note { margin: .5rem 0 1rem 0; color: var(--muted); }
 
-/* Unified media sizing for <video>/<img> demos */
+
 .prog-demo .demo-media,
 .prog-demo img {
   width: 100%;
@@ -125,13 +122,12 @@
   object-fit: contain;
 }
 
-/* Button for details */
+
 .btn.btn-details { --btn-color: var(--fg); }
 
 
-/* removed .demo-actions, .demo-placeholder, .demo-frame, .demo-note per request */
 
-/* Responsive */
+
 @media (max-width: 980px) {
   .prog-grid { grid-template-columns: 1fr; }
 }
@@ -141,10 +137,10 @@
   .prog-header h1 { font-size: 1.8rem; }
   .prog-card { padding: 1rem; }
 }
-/* Web fonts for CP2077-like typography */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
 
-/* Page-scoped theme variables + typography */
+
 body.theme-cp {
   --bg:#0b0f14;
   --fg:#d7e2ea;

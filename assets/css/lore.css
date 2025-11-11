@@ -37,7 +37,7 @@
   margin: 1rem 0 0;
 }
 
-/* Card */
+
 .lore-card {
   background: linear-gradient(180deg, rgba(11,15,20,.85), rgba(11,15,20,.72));
   border: 1px solid rgba(0,217,255,.35);
@@ -49,10 +49,10 @@
   position: relative;
 }
 
-/* Button for details */
+
 .btn.btn-details { --btn-color: var(--fg); }
 
-/* decorative corners */
+
 .lore-card::before,
 .lore-card::after { content:""; position:absolute; width:26px; height:26px; border:1px solid var(--accent); opacity:.7; }
 .lore-card::before { left:-1px; top:-1px; border-right:0; border-bottom:0; border-top-left-radius:6px; }
@@ -66,7 +66,7 @@
 }
 .lore-card-header .small { color: var(--muted); }
 
-/* Layout for subsections */
+
 .lore-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -102,7 +102,7 @@
   margin-top: .25rem;
 }
 
-/* Per-entry layout: button + short note */
+
 .entry-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -116,12 +116,12 @@
 }
 .entry .entry-desc { margin: 0; color: var(--muted); }
 
-/* Secondary button variant using fg2 */
+
 .btn.btn-alt { --btn-color: var(--fg2); }
 
 .lore-footer { margin: 1rem 0 0 0; color: var(--muted); }
 
-/* Responsive */
+
 @media (max-width: 1024px) {
   .lore-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -132,10 +132,10 @@
   .lore-card { padding: 1rem; }
   .lore-grid { grid-template-columns: 1fr; }
 }
-/* Web fonts for CP2077-like typography */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@500;600;700&display=swap');
 
-/* Page-scoped theme variables + typography */
+
 body.theme-cp {
   --bg:#0b0f14;
   --fg:#d7e2ea;
