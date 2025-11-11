@@ -1,4 +1,4 @@
-/* ========== Cyberpunk layout polish (scoped to design only) ========== */
+
 .gdd-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -8,7 +8,7 @@
     isolation: isolate;
 }
 
-/* subtle scanline + corner glows like CP2077 */
+
 .gdd-container::before {
     content: "";
     position: absolute;
@@ -63,7 +63,7 @@
     letter-spacing: 2px;
 }
 
-/* panel with slanted corners and neon edge */
+
 .gdd-card {
     background: linear-gradient(180deg, rgba(11,15,20,.85), rgba(11,15,20,.7));
     border: 1px solid rgba(0, 217, 255, .35);
@@ -76,7 +76,7 @@
 }
 
 
-/* decorative corners */
+
 .gdd-card::before,
 .gdd-card::after {
     content: "";
@@ -136,66 +136,5 @@
     border-radius: 4px;
 }
 
-/* 添加响应式设计 */
-@media (max-width: 768px) {
-    .gdd-container {
-        padding: 1rem;
-    }
-    
-    .gdd-header h1 {
-        font-size: 2rem;
-    }
-    
-    .gdd-section h2 {
-        font-size: 1.5rem;
-    }
-    
-    .gdd-card {
-        padding: 1.5rem;
-    }
-}
 
-/* entrance animation */
-.gdd-card { animation: fadeIn 0.5s ease-out; }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-/* Web fonts for CP2077-like typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
-
-/* Themed variables and base text styles for this page only */
-body.theme-cp {
-    /* Cyberpunk 2077 inspired palette */
-    --bg:#0b0f14;
-    --fg:#d7e2ea;         /* primary text */
-    --fg2:#ffb400;        /* amber secondary */
-    --accent:#00eaff;     /* neon cyan */
-    --muted:#7aa1c0;      /* muted blue-gray */
-
-    background:
-      radial-gradient(1000px 520px at 20% 0%, rgba(0,234,255,.12), transparent 60%),
-      linear-gradient(180deg, #0c121a 0%, #0a0e16 60%, #07090f 100%);
-    color: var(--fg);
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-variant-numeric: tabular-nums;
-}
-
-/* Headings with condensed techno look */
-body.theme-cp h1,
-body.theme-cp h2,
-body.theme-cp h3,
-body.theme-cp h4 { font-family: Rajdhani, Inter, Arial, sans-serif; font-weight: 700; }
-
-/* Monospace detail accents */
-body.theme-cp .filename,
-body.theme-cp .cyber-list li:before { font-family: "Share Tech Mono", ui-monospace, Consolas, monospace; }
